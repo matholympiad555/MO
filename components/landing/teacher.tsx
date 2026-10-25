@@ -11,36 +11,35 @@ import {
   User,
   ArrowRight,
 } from "@phosphor-icons/react";
+import { useLanguage } from "@/lib/language-context";
 
 export function Teacher() {
+  const { t, language } = useLanguage();
+
   const credentials = [
     {
       icon: <Trophy size={22} weight="fill" className="text-amber-500" />,
-      title: "জাতীয় অলিম্পিয়াড অর্জন (National Olympiad Pedigree)",
-      description:
-        "বাংলাদেশ জাতীয় গণিত অলিম্পিয়াড (BdMO)-এর সাবেক পদকপ্রাপ্ত ও ন্যাশনাল ক্যাম্পারদের দ্বারা প্রণীত সিলেবাস ও কনসেপ্ট বিশ্লেষণ।",
-      highlight: "BdMO মেডেলিস্ট ও ক্যাম্পার",
+      title: t.cred1Title,
+      description: t.cred1Desc,
+      highlight: language === "bn" ? "BdMO মেডেলিস্ট ও ক্যাম্পার" : "BdMO Medalists & Campers",
     },
     {
       icon: <GraduationCap size={22} weight="fill" className="text-[#0072c6]" />,
-      title: "আন্তর্জাতিক অলিম্পিয়াড প্রশিক্ষণ ফ্রেমওয়ার্ক",
-      description:
-        "APMO এবং IMO স্ট্যান্ডার্ড লজিক্যাল থিংকিং ও প্রবলেম সলভিং টেকনিকের আলোকে প্রাইমারি শিক্ষার্থীদের জন্য উপযোগী করে সাজানো পাঠদান।",
-      highlight: "APMO ও IMO স্ট্যান্ডার্ড",
+      title: t.cred2Title,
+      description: t.cred2Desc,
+      highlight: language === "bn" ? "APMO ও IMO স্ট্যান্ডার্ড" : "APMO & IMO Standards",
     },
     {
       icon: <Users size={22} weight="fill" className="text-[#28a745]" />,
-      title: "৪+ বছরের অলিম্পিয়াড মেন্টরশিপ অভিজ্ঞতা",
-      description:
-        "বিগত ৪ বছরে ৫০০+ শিক্ষার্থীকে সফলভাবে অলিম্পিয়াড ক্যাম্প ও রিজিওনাল রাউন্ডের জন্য প্রস্তুত করার পরীক্ষিত ট্র্যাক রেকর্ড।",
-      highlight: "৫০০+ মেন্টর্ড শিক্ষার্থী",
+      title: t.cred3Title,
+      description: t.cred3Desc,
+      highlight: language === "bn" ? "৫০০+ মেন্টর্ড শিক্ষার্থী" : "500+ Mentored Students",
     },
     {
       icon: <ChatsCircle size={22} weight="fill" className="text-purple-600" />,
-      title: "২৪/৭ সরাসরি ডিসকাশন ও ডাউট সলভিং",
-      description:
-        "শুধু লাইভ ক্লাস নয়, ডেডিকেটেড ডিসকাশন পোর্টালে শিক্ষার্থীদের যেকোনো প্রশ্ন বা সমস্যা তাৎক্ষণিক সমাধানের জন্য সার্বক্ষণিক মেন্টর সাপোর্ট।",
-      highlight: "সার্বক্ষণিক মেন্টর গাইড",
+      title: t.cred4Title,
+      description: t.cred4Desc,
+      highlight: language === "bn" ? "সার্বক্ষণিক মেন্টর গাইড" : "Dedicated Mentor Support",
     },
   ];
 
@@ -52,17 +51,17 @@ export function Teacher() {
           <Reveal>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0072c6] text-xs font-semibold">
               <span className="w-2 h-2 rounded-full bg-[#0072c6]" />
-              <span>গাণিতিক যুক্তির পথপ্রদর্শক</span>
+              <span>{t.teacherTag}</span>
             </div>
           </Reveal>
           <Reveal delay={100}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-shadhinata font-bold text-slate-900 tracking-tight leading-tight">
-              ইন্সট্রাক্টর পরিচিতি ও মেন্টর প্যানেল
+              {t.teacherTitle}
             </h2>
           </Reveal>
           <Reveal delay={150}>
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-              মুখস্থ নয়—চিন্তা করো, যুক্তি খোঁজো, সমাধান করো। বাংলাদেশ গণিত অলিম্পিয়াডের শীর্ষ ক্যাম্পার ও অভিজ্ঞ মেন্টরদের প্রত্যক্ষ তত্ত্বাবধানে গড়ে উঠবে তোমার সমস্যা সমাধানের দক্ষতা।
+              {t.teacherSubtitle}
             </p>
           </Reveal>
         </div>
@@ -87,15 +86,18 @@ export function Teacher() {
                         </div>
                       </div>
                       <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#0072c6] text-white text-[11px] font-bold px-3 py-0.5 rounded-full shadow-sm border border-white">
-                        প্রধান ইন্সট্রাক্টর টিম
+                        {language === "bn" ? "প্রধান ইন্সট্রাক্টর টিম" : "Lead Instructor Team"}
                       </div>
                     </div>
 
                     <h3 className="text-xl sm:text-2xl font-shadhinata font-bold text-slate-900">
-                      সাবেক জাতীয় ক্যাম্পার ও মেন্টরস
+                      {t.teacherLeadTitle}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
-                      বাংলাদেশ গণিত অলিম্পিয়াড (BdMO) পরিবার
+                      {language === "bn" ? "বাংলাদেশ গণিত অলিম্পিয়াড (BdMO) পরিবার" : "Bangladesh Math Olympiad (BdMO) Network"}
+                    </p>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-2 font-normal">
+                      {t.teacherLeadBio}
                     </p>
                   </div>
 
@@ -103,15 +105,33 @@ export function Teacher() {
                   <div className="space-y-2.5 pt-2">
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-700">
                       <CheckCircle size={18} weight="fill" className="text-[#28a745] shrink-0" />
-                      <span><strong>জাতীয় ক্যাম্পার:</strong> বিডিএমও জাতীয় ক্যাম্প ও সিলেকশন অভিজ্ঞতা</span>
+                      <span>
+                        {language === "bn" ? (
+                          <><strong>জাতীয় ক্যাম্পার:</strong> বিডিএমও জাতীয় ক্যাম্প ও সিলেকশন অভিজ্ঞতা</>
+                        ) : (
+                          <><strong>National Campers:</strong> BdMO National Camp & Selection Pedigree</>
+                        )}
+                      </span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-700">
                       <CheckCircle size={18} weight="fill" className="text-[#0072c6] shrink-0" />
-                      <span><strong>প্রাইমারি স্পেশালিস্ট:</strong> শিশুদের জন্য সহজবোধ্য গাণিতিক মেথড</span>
+                      <span>
+                        {language === "bn" ? (
+                          <><strong>প্রাইমারি স্পেশালিস্ট:</strong> শিশুদের জন্য সহজবোধ্য গাণিতিক মেথড</>
+                        ) : (
+                          <><strong>Primary Specialists:</strong> Intuitive mathematical methods for young learners</>
+                        )}
+                      </span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-700">
                       <CheckCircle size={18} weight="fill" className="text-amber-500 shrink-0" />
-                      <span><strong>সমস্যা সমাধান:</strong> সংখ্যাতত্ত্ব, জ্যামিতি ও কম্বিনেটরিক্স বিশেষজ্ঞ</span>
+                      <span>
+                        {language === "bn" ? (
+                          <><strong>সমস্যা সমাধান:</strong> সংখ্যাতত্ত্ব, জ্যামিতি ও কম্বিনেটরিক্স বিশেষজ্ঞ</>
+                        ) : (
+                          <><strong>Problem Solving:</strong> Masters in Number Theory, Geometry & Combinatorics</>
+                        )}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -120,10 +140,12 @@ export function Teacher() {
                 <div className="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
                   <div className="flex items-center gap-1.5">
                     <ShieldCheck size={16} weight="fill" className="text-[#28a745]" />
-                    <span className="font-semibold text-slate-700">ভেরিফাইড মেন্টরশিপ</span>
+                    <span className="font-semibold text-slate-700">
+                      {language === "bn" ? "ভেরিফাইড মেন্টরশিপ" : "Verified Mentorship"}
+                    </span>
                   </div>
                   <span className="text-[11px] bg-amber-50 text-amber-800 px-2.5 py-1 rounded-md font-bold border border-amber-200">
-                    ব্যাচ ২০২৬
+                    {language === "bn" ? "ব্যাচ ২০২৬" : "Batch 2026"}
                   </span>
                 </div>
               </div>
@@ -162,17 +184,19 @@ export function Teacher() {
               <div className="p-5 rounded-2xl bg-gradient-to-r from-[#005a9e] to-[#0072c6] text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
                 <div className="space-y-1 text-center sm:text-left">
                   <div className="font-shadhinata text-base font-bold text-white">
-                    সরাসরি মেন্টরদের সাথে সংযুক্ত হতে প্রস্তুত?
+                    {language === "bn" ? "সরাসরি মেন্টরদের সাথে সংযুক্ত হতে প্রস্তুত?" : "Ready to connect directly with mentors?"}
                   </div>
                   <div className="text-xs text-blue-100">
-                    সীমিত সিটে প্রি-বুক করে তোমার লাইভ ক্লাসের প্রবেশাধিকার নিশ্চিত করো।
+                    {language === "bn"
+                      ? "সীমিত সিটে প্রি-বুক করে তোমার লাইভ ক্লাসের প্রবেশাধিকার নিশ্চিত করো।"
+                      : "Pre-book with limited seats to secure your access to live classes."}
                   </div>
                 </div>
                 <a
                   href="#prebook"
                   className="px-5 py-2.5 rounded-xl bg-[#28a745] hover:bg-[#218838] active:bg-[#1e7e34] text-white font-bold text-xs whitespace-nowrap shadow-sm transition-all flex items-center gap-1.5"
                 >
-                  <span>প্রি-বুক করো</span>
+                  <span>{language === "bn" ? "প্রি-বুক করো" : "Pre-Book Now"}</span>
                   <ArrowRight size={14} weight="bold" />
                 </a>
               </div>

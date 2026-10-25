@@ -14,7 +14,7 @@ import {
   PhoneCall,
   CheckCircle,
 } from "@phosphor-icons/react";
-import { site } from "@/lib/content";
+import { useLanguage } from "@/lib/language-context";
 
 interface FaqItem {
   id: string;
@@ -24,70 +24,91 @@ interface FaqItem {
   icon: any;
 }
 
-const faqList: FaqItem[] = [
-  {
-    id: "class-method",
-    category: "class",
-    icon: VideoCamera,
-    question: "ক্লাস কীভাবে হবে?",
-    answer:
-      "ক্লাসগুলো Google Meet / Zoom-এ সরাসরি লাইভ পরিচালিত হবে। প্রতিটি ক্লাসে মুখস্থের বাইরে গিয়ে সমস্যা বিশ্লেষণ, গাণিতিক যুক্তি ও কনসেপ্ট শেখানো হবে। শিক্ষার্থীরা সরাসরি মাইক ও চ্যাটে প্রশ্ন করতে পারবে। ক্লাসের জয়েনিং লিংক ও সাপ্তাহিক রুটিন ভেরিফাইড শিক্ষার্থীদের হোয়াটসঅ্যাপ গ্রুপ ও এসএমএসে জানিয়ে দেওয়া হবে।",
-  },
-  {
-    id: "recording",
-    category: "class",
-    icon: PlayCircle,
-    question: "রেকর্ডিং পাওয়া যাবে কি?",
-    answer:
-      "হ্যাঁ, অবশ্যই! কোনো কারণে লাইভ ক্লাস মিস হলে বা পুনরায় রিভিশন দিতে চাইলে প্রতিটি ক্লাসের সম্পূর্ণ এইচডি রেকর্ডিং ও লেকচার শিট পোর্টালের আর্কাইভে আপলোড করা হবে। কোর্স চলাকালীন এবং অলিম্পিয়াড পরীক্ষা পর্যন্ত যেকোনো সময় যতবার ইচ্ছা রেকর্ডিং দেখা যাবে।",
-  },
-  {
-    id: "payment-verify",
-    category: "payment",
-    icon: Clock,
-    question: "পেমেন্ট ভেরিফাই হতে কতক্ষণ লাগে?",
-    answer:
-      "বিকাশ করার পর ফর্ম সাবমিট করলে সাধারণত ৫ থেকে ৩০ মিনিটের মধ্যে আমাদের অ্যাডমিন প্যানেল ট্রানজেকশন আইডি (TrxID) মিলিয়ে সিট কনফার্ম করে দেয়। তুমি ওয়েবসাইটের 'স্ট্যাটাস চেক' পেজে তোমার ফোন নম্বর বা TrxID দিয়ে তাৎক্ষণিক ভেরিফিকেশন স্টেটাস ও রোল দেখতে পারবে।",
-  },
-  {
-    id: "mock-test",
-    category: "mock",
-    icon: Exam,
-    question: "মক টেস্ট কীভাবে দিব?",
-    answer:
-      "আমাদের রয়েছে GonitZoggo স্টাইলে আধুনিক অনলাইন মক টেস্ট প্ল্যাটফর্ম। সেখানে শিক্ষার্থীরা অলিম্পিয়াড স্ট্যান্ডার্ড ২০+ পূর্ণাঙ্গ মক টেস্ট সরাসরি টাইমার সহ অনলাইনে দিতে পারবে। সাবমিট করার সাথে সাথেই তাৎক্ষণিক স্কোরকার্ড, সঠিক উত্তরের বিস্তারিত ব্যাখ্যা ও র‍্যাঙ্কিং দেখতে পাবে।",
-  },
-  {
-    id: "payment-process",
-    category: "payment",
-    icon: CheckCircle,
-    question: "কোর্স ফি কত এবং কীভাবে পেমেন্ট করব?",
-    answer:
-      "কোর্স ফি মাত্র ১৯৯ টাকা (এককালীন অফার ফি)। bKash Personal নম্বর ০১৩৩১৩৬৬৮৬৫-এ 'Send Money' করুন। Reference ঘরে লিখুন 'PRE_BOOK'। টাকা পাঠানোর পর প্রাপ্ত ফিরতি এসএমএস থেকে Transaction ID (TrxID) কপি করে আমাদের প্রি-বুক ফর্মে লিখে সাবমিট করুন।",
-  },
-  {
-    id: "help-contact",
-    category: "general",
-    icon: Question,
-    question: "কোনো সমস্যা বা প্রশ্ন থাকলে কীভাবে সহায়তা পাব?",
-    answer:
-      "আমাদের ২৪/৭ স্টুডেন্ট হেল্প ডেস্ক এবং ডেডিকেটেড Q&A ডিসকাশন ফোরাম রয়েছে। এছাড়া যেকোনো সহায়তার জন্য হেল্পলাইন নম্বর +8801331366865 অথবা সরাসরি হোয়াটসঅ্যাপে মেসেজ দিলে আমাদের টিম তাৎক্ষণিক সহায়তা করবে।",
-  },
-];
-
 export function Faq() {
+  const { t, language } = useLanguage();
   const [openId, setOpenId] = useState<string>("class-method");
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
   const categories = [
-    { label: "সকল প্রশ্ন", value: "all" },
-    { label: "ক্লাস ও রেকর্ডিং", value: "class" },
-    { label: "পেমেন্ট ও ভেরিফিকেশন", value: "payment" },
-    { label: "মক টেস্ট ও সহায়তা", value: "mock" },
+    { label: language === "bn" ? "সকল প্রশ্ন" : "All Questions", value: "all" },
+    { label: language === "bn" ? "ক্লাস ও রেকর্ডিং" : "Classes & Recordings", value: "class" },
+    { label: language === "bn" ? "পেমেন্ট ও ভেরিফিকেশন" : "Payment & Verification", value: "payment" },
+    { label: language === "bn" ? "মক টেস্ট ও সহায়তা" : "Mock Tests & Support", value: "mock" },
+  ];
+
+  const faqList: FaqItem[] = [
+    {
+      id: "class-method",
+      category: "class",
+      icon: VideoCamera,
+      question: language === "bn" ? "ক্লাস কীভাবে হবে?" : t.faqQ1,
+      answer:
+        language === "bn"
+          ? "ক্লাসগুলো Google Meet / Zoom-এ সরাসরি লাইভ পরিচালিত হবে। প্রতিটি ক্লাসে মুখস্থের বাইরে গিয়ে সমস্যা বিশ্লেষণ, গাণিতিক যুক্তি ও কনসেপ্ট শেখানো হবে। শিক্ষার্থীরা সরাসরি মাইক ও চ্যাটে প্রশ্ন করতে পারবে। ক্লাসের জয়েনিং লিংক ও সাপ্তাহিক রুটিন ভেরিফাইড শিক্ষার্থীদের হোয়াটসঅ্যাপ গ্রুপ ও এসএমএসে জানিয়ে দেওয়া হবে।"
+          : t.faqA1,
+    },
+    {
+      id: "recording",
+      category: "class",
+      icon: PlayCircle,
+      question: language === "bn" ? "রেকর্ডিং পাওয়া যাবে কি?" : t.faqQ2,
+      answer:
+        language === "bn"
+          ? "হ্যাঁ, অবশ্যই! কোনো কারণে লাইভ ক্লাস মিস হলে বা পুনরায় রিভিশন দিতে চাইলে প্রতিটি ক্লাসের সম্পূর্ণ এইচডি রেকর্ডিং ও লেকচার শিট পোর্টালের আর্কাইভে আপলোড করা হবে। কোর্স চলাকালীন এবং অলিম্পিয়াড পরীক্ষা পর্যন্ত যেকোনো সময় যতবার ইচ্ছা রেকর্ডিং দেখা যাবে।"
+          : t.faqA2,
+    },
+    {
+      id: "payment-verify",
+      category: "payment",
+      icon: Clock,
+      question: language === "bn" ? "পেমেন্ট ভেরিফাই হতে কতক্ষণ লাগে?" : t.faqQ3,
+      answer:
+        language === "bn"
+          ? "বিকাশ করার পর ফর্ম সাবমিট করলে সাধারণত ৫ থেকে ৩০ মিনিটের মধ্যে আমাদের অ্যাডমিন প্যানেল ট্রানজেকশন আইডি (TrxID) মিলিয়ে সিট কনফার্ম করে দেয়। তুমি ওয়েবসাইটের 'স্ট্যাটাস চেক' পেজে তোমার ফোন নম্বর বা TrxID দিয়ে তাৎক্ষণিক ভেরিফিকেশন স্টেটাস ও রোল দেখতে পারবে।"
+          : t.faqA3,
+    },
+    {
+      id: "mock-test",
+      category: "mock",
+      icon: Exam,
+      question: language === "bn" ? "মক টেস্ট কীভাবে দিব?" : t.faqQ4,
+      answer:
+        language === "bn"
+          ? "আমাদের রয়েছে GonitZoggo স্টাইলে আধুনিক অনলাইন মক টেস্ট প্ল্যাটফর্ম। সেখানে শিক্ষার্থীরা অলিম্পিয়াড স্ট্যান্ডার্ড ২০+ পূর্ণাঙ্গ মক টেস্ট সরাসরি টাইমার সহ অনলাইনে দিতে পারবে। সাবমিট করার সাথে সাথেই তাৎক্ষণিক স্কোরকার্ড, সঠিক উত্তরের বিস্তারিত ব্যাখ্যা ও র‍্যাঙ্কিং দেখতে পাবে।"
+          : t.faqA4,
+    },
+    {
+      id: "payment-process",
+      category: "payment",
+      icon: CheckCircle,
+      question:
+        language === "bn"
+          ? "কোর্স ফি কত এবং কীভাবে পেমেন্ট করব?"
+          : "What is the course fee and how do I pay?",
+      answer:
+        language === "bn"
+          ? "কোর্স ফি মাত্র ১৯৯ টাকা (এককালীন অফার ফি)। bKash Personal নম্বর ০১৩৩১৩৬৬৮৬৫-এ 'Send Money' করুন। Reference ঘরে লিখুন 'PRE_BOOK'। টাকা পাঠানোর পর প্রাপ্ত ফিরতি এসএমএস থেকে Transaction ID (TrxID) কপি করে আমাদের প্রি-বুক ফর্মে লিখে সাবমিট করুন।"
+          : "The course fee is only 199 BDT (special discounted fee). Send Money to personal bKash 01331366865 with Reference 'PRE_BOOK'. After sending money, copy the Transaction ID (TrxID) from your bKash SMS and submit it in our pre-booking form.",
+    },
+    {
+      id: "help-contact",
+      category: "general",
+      icon: Question,
+      question:
+        language === "bn"
+          ? "কোনো সমস্যা বা প্রশ্ন থাকলে কীভাবে সহায়তা পাব?"
+          : "How can I get help if I have any questions?",
+      answer:
+        language === "bn"
+          ? "আমাদের ২৪/৭ স্টুডেন্ট হেল্প ডেস্ক এবং ডেডিকেটেড Q&A ডিসকাশন ফোরাম রয়েছে। এছাড়া যেকোনো সহায়তার জন্য হেল্পলাইন নম্বর +8801331366865 অথবা সরাসরি হোয়াটসঅ্যাপে মেসেজ দিলে আমাদের টিম তাৎক্ষণিক সহায়তা করবে।"
+          : "We have a 24/7 student help desk and dedicated Q&A forum. For direct help, call our helpline +8801331366865 or message us on WhatsApp.",
+    },
   ];
 
   const filteredFaqs = faqList.filter((item) =>
-    activeCategory === "all" ? true : item.category === activeCategory || (activeCategory === "mock" && item.category === "general"),
+    activeCategory === "all"
+      ? true
+      : item.category === activeCategory || (activeCategory === "mock" && item.category === "general")
   );
 
   return (
@@ -98,17 +119,17 @@ export function Faq() {
           <Reveal>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0072c6] text-xs font-semibold">
               <ChatCircleDots size={16} weight="bold" />
-              <span>হেল্প ডেস্ক ও সাধারণ জিজ্ঞাসা</span>
+              <span>{t.faqTag}</span>
             </div>
           </Reveal>
           <Reveal delay={100}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-shadhinata font-bold text-slate-900 tracking-tight leading-tight">
-              সচরাচর জিজ্ঞাসা ও প্রশ্নোত্তর
+              {t.faqTitle}
             </h2>
           </Reveal>
           <Reveal delay={150}>
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-              কোর্স, লাইভ ক্লাস, রেকর্ডিং, পেমেন্ট কিংবা মক টেস্ট সম্পর্কে তোমার মনে থাকা সব প্রশ্নের উত্তর এখানে একনজরে দেখে নাও।
+              {t.faqSubtitle}
             </p>
           </Reveal>
 
@@ -119,7 +140,7 @@ export function Faq() {
                 <button
                   key={cat.value}
                   onClick={() => setActiveCategory(cat.value)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                     activeCategory === cat.value
                       ? "bg-[#0072c6] text-white shadow-sm"
                       : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
@@ -151,7 +172,7 @@ export function Faq() {
                   >
                     <button
                       onClick={() => setOpenId(isOpen ? "" : faq.id)}
-                      className="w-full flex items-center justify-between p-5 text-left gap-4"
+                      className="w-full flex items-center justify-between p-5 text-left gap-4 cursor-pointer"
                       aria-expanded={isOpen}
                     >
                       <div className="flex items-center gap-3.5">
@@ -200,13 +221,15 @@ export function Faq() {
               <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-sm space-y-6">
                 <div className="space-y-2">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#0072c6] bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
-                    সরাসরি সাপোর্ট
+                    {language === "bn" ? "সরাসরি সাপোর্ট" : "Direct Support"}
                   </span>
                   <h3 className="text-xl font-shadhinata font-bold text-slate-900">
-                    আরও কোনো প্রশ্ন আছে?
+                    {language === "bn" ? "আরও কোনো প্রশ্ন আছে?" : "Have More Questions?"}
                   </h3>
                   <p className="text-xs text-slate-500 leading-relaxed">
-                    আমাদের সাপোর্ট টিম সকাল ৯টা থেকে রাত ১১টা পর্যন্ত সক্রিয় থাকে। নির্দ্বিধায় মেসেজ দিন।
+                    {language === "bn"
+                      ? "আমাদের সাপোর্ট টিম সকাল ৯টা থেকে রাত ১১টা পর্যন্ত সক্রিয় থাকে। নির্দ্বিধায় মেসেজ দিন।"
+                      : "Our support team is available daily from 9:00 AM to 11:00 PM. Feel free to message us."}
                   </p>
                 </div>
 
@@ -221,7 +244,9 @@ export function Faq() {
                       <WhatsappLogo size={20} weight="fill" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-emerald-950">হোয়াটসঅ্যাপ হেল্পলাইন</div>
+                      <div className="text-xs font-bold text-emerald-950">
+                        {language === "bn" ? "হোয়াটসঅ্যাপ হেল্পলাইন" : "WhatsApp Helpline"}
+                      </div>
                       <div className="text-[11px] text-emerald-700 font-mono">+8801331366865</div>
                     </div>
                   </a>
@@ -234,7 +259,9 @@ export function Faq() {
                       <PhoneCall size={20} weight="fill" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-slate-900">সরাসরি কল সেন্টার</div>
+                      <div className="text-xs font-bold text-slate-900">
+                        {language === "bn" ? "সরাসরি কল সেন্টার" : "Direct Call Center"}
+                      </div>
                       <div className="text-[11px] text-slate-600 font-mono">০১৩৩১-৩৬৬৮৬৫</div>
                     </div>
                   </a>
@@ -243,10 +270,12 @@ export function Faq() {
                 <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-100 text-slate-700 text-xs space-y-1.5">
                   <div className="font-bold text-[#0072c6] flex items-center gap-1.5">
                     <CheckCircle size={15} weight="fill" />
-                    <span>দ্রুত পেমেন্ট সহায়তা</span>
+                    <span>{language === "bn" ? "দ্রুত পেমেন্ট সহায়তা" : "Quick Payment Support"}</span>
                   </div>
                   <p className="text-[11px] text-slate-600">
-                    bKash ট্রানজেকশনে কোনো সমস্যা হলে TrxID সহ হোয়াটসঅ্যাপে স্ক্রিনশট পাঠালে ৫ মিনিটে সমাধান করা হবে।
+                    {language === "bn"
+                      ? "bKash ট্রানজেকশনে কোনো সমস্যা হলে TrxID সহ হোয়াটসঅ্যাপে স্ক্রিনশট পাঠালে ৫ মিনিটে সমাধান করা হবে।"
+                      : "If you face any issues with your bKash payment, send a screenshot with your TrxID on WhatsApp for resolution in 5 minutes."}
                   </p>
                 </div>
               </div>

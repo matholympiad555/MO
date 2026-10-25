@@ -16,32 +16,47 @@ import {
   ArrowRight,
   BookOpen,
 } from "@phosphor-icons/react";
+import { useLanguage } from "@/lib/language-context";
 
 export function Course() {
+  const { t, language } = useLanguage();
+
   // Live class & core delivery highlights (Requirement 3)
   const deliveryFeatures = [
     {
-      title: "৭+ ঘণ্টা লাইভ ক্লাস",
-      description: "মেন্টরের সাথে সরাসরি ইন্টারঅ্যাকশন, কনসেপ্ট ক্লিয়ারিং ও লাইভ প্রবলেম সলভিং।",
-      badge: "ইন্টারঅ্যাক্টিভ",
+      title: t.includeLive,
+      description:
+        language === "bn"
+          ? "মেন্টরের সাথে সরাসরি ইন্টারঅ্যাকশন, কনসেপ্ট ক্লিয়ারিং ও লাইভ প্রবলেম সলভিং।"
+          : "Direct interactive mentor sessions, concept clarity, and live problem solving.",
+      badge: language === "bn" ? "ইন্টারঅ্যাক্টিভ" : "Interactive",
       icon: VideoCamera,
     },
     {
-      title: "রেকর্ডেড লেকচার",
-      description: "প্রতিটি ক্লাসের ফুল এইচডি রেকর্ডিং, সুবিধাজনক সময়ে বারবার দেখার সুযোগ।",
-      badge: "লাইফটাইম অ্যাক্সেস",
+      title: t.includeRecorded,
+      description:
+        language === "bn"
+          ? "প্রতিটি ক্লাসের ফুল এইচডি রেকর্ডিং, সুবিধাজনক সময়ে বারবার দেখার সুযোগ।"
+          : "Full HD recordings of every class with lifetime access to rewatch anytime.",
+      badge: language === "bn" ? "লাইফটাইম অ্যাক্সেস" : "Lifetime Access",
       icon: PlayCircle,
     },
     {
-      title: "প্র্যাকটিস শিট",
-      description: "প্রতিটি বিষয়ের ওপর কিউরেটেড অলিম্পিয়াড স্ট্যান্ডার্ড প্রশ্ন সংকলন ও হ্যান্ডআউট।",
-      badge: "এক্সক্লুসিভ ম্যাটেরিয়াল",
+      title: t.includePractice,
+      description:
+        language === "bn"
+          ? "প্রতিটি বিষয়ের ওপর কিউরেটেড অলিম্পিয়াড স্ট্যান্ডার্ড প্রশ্ন সংকলন ও হ্যান্ডআউট।"
+          : "Curated Olympiad-standard problem sets and practice handouts for each topic.",
+      badge: language === "bn" ? "এক্সক্লুসিভ ম্যাটেরিয়াল" : "Exclusive Material",
       icon: FileText,
     },
     {
-      title: "সমাধান ক্লাস",
-      description: "হোমওয়ার্ক, কুইজ ও জটিল সমস্যার পুঙ্খানুপুঙ্খ সমাধান এবং অলিম্পিয়াড ট্রিকস।",
-      badge: "ডাউট সলভিং",
+      title: t.includeDoubt,
+      description:
+        language === "bn"
+          ? "হোমওয়ার্ক, কুইজ ও জটিল সমস্যার পুঙ্খানুপুঙ্খ সমাধান এবং অলিম্পিয়াড ট্রিকস।"
+          : "Comprehensive doubt resolution for homework, quizzes, and tricky Olympiad puzzles.",
+      badge: language === "bn" ? "ডাউট সলভিং" : "Doubt Solving",
       icon: ChatsCircle,
     },
   ];
@@ -50,67 +65,127 @@ export function Course() {
   const pillars = [
     {
       id: "pillar-nt",
-      pillarNo: "স্তম্ভ ০১",
+      pillarNo: language === "bn" ? "স্তম্ভ ০১" : "Pillar 01",
       pillarTag: "NUMBER THEORY",
-      title: "সংখ্যাতত্ত্ব (Number Theory)",
-      subtitle: "মৌলিক সংখ্যা, ভাজক ও বিভাজ্যতা",
-      intro: "সংখ্যার গভীরে লুকিয়ে থাকা আকর্ষণীয় নিয়ম, গুণনীয়ক এবং বিভাজ্যতার যৌক্তিক ভিত্তি উন্মোচন।",
+      title: t.mod1Title,
+      subtitle: language === "bn" ? "মৌলিক সংখ্যা, ভাজক ও বিভাজ্যতা" : "Primes, Divisors & Divisibility",
+      intro: t.mod1Desc,
       icon: Calculator,
       topics: [
-        { name: "মৌলিক সংখ্যা ও উৎপাদক বিশ্লেষণ", en: "Prime Numbers & Factors" },
-        { name: "ভাজক সংখ্যা ও বিভাজ্যতার নিয়ম", en: "Divisors & Divisibility Rules" },
-        { name: "লসাগু ও গসাগু এর ব্যবহারিক প্রয়োগ", en: "LCM & GCD Applications" },
-        { name: "মডুলার অ্যারিথমেটিক ও ভাগশেষ নীতি", en: "Modular Arithmetic & Remainders" },
+        {
+          name: language === "bn" ? "মৌলিক সংখ্যা ও উৎপাদক বিশ্লেষণ" : "Prime Numbers & Factors",
+          en: "Prime Numbers & Factors",
+        },
+        {
+          name: language === "bn" ? "ভাজক সংখ্যা ও বিভাজ্যতার নিয়ম" : "Divisors & Divisibility Rules",
+          en: "Divisors & Divisibility Rules",
+        },
+        {
+          name: language === "bn" ? "লসাগু ও গসাগু এর ব্যবহারিক প্রয়োগ" : "LCM & GCD Applications",
+          en: "LCM & GCD Applications",
+        },
+        {
+          name: language === "bn" ? "মডুলার অ্যারিথমেটিক ও ভাগশেষ নীতি" : "Modular Arithmetic & Remainders",
+          en: "Modular Arithmetic & Remainders",
+        },
       ],
-      tagline: "অলিম্পিয়াড স্পেশাল: ভাগশেষ ও প্যাটার্ন বিশ্লেষণ",
+      tagline:
+        language === "bn"
+          ? "অলিম্পিয়াড স্পেশাল: ভাগশেষ ও প্যাটার্ন বিশ্লেষণ"
+          : "Olympiad Special: Remainder & Pattern Analysis",
     },
     {
       id: "pillar-geo",
-      pillarNo: "স্তম্ভ ০২",
+      pillarNo: language === "bn" ? "স্তম্ভ ০২" : "Pillar 02",
       pillarTag: "GEOMETRY",
-      title: "জ্যামিতি (Geometry)",
-      subtitle: "ত্রিভুজ, বৃত্ত, কোণ ও উপপাদ্য",
-      intro: "চিত্রের যুক্তি, জ্যামিতিক দৃষ্টিশক্তি এবং কোণ ও ক্ষেত্রফলের মধ্যবর্তী সম্পর্ক নিখুঁতভাবে পরিমাপের কৌশল।",
+      title: t.mod2Title,
+      subtitle: language === "bn" ? "ত্রিভুজ, বৃত্ত, কোণ ও উপপাদ্য" : "Triangles, Circles, Angles & Theorems",
+      intro: t.mod2Desc,
       icon: Compass,
       topics: [
-        { name: "ত্রিভুজ ও চতুর্ভুজের বৈশিষ্ট্য", en: "Triangles & Polygons" },
-        { name: "বৃত্ত ও স্পর্শক সংক্রান্ত প্রাথমিক ধারণা", en: "Circles & Tangents" },
-        { name: "ক্ষেত্রফল ও কোণ গণনা পদ্ধতি", en: "Area & Angle Calculations" },
-        { name: "পিথাগোরাস উপপাদ্য ও এর বাস্তব প্রয়োগ", en: "Pythagorean Theorem & Proofs" },
+        {
+          name: language === "bn" ? "ত্রিভুজ ও চতুর্ভুজের বৈশিষ্ট্য" : "Triangles & Polygons",
+          en: "Triangles & Polygons",
+        },
+        {
+          name: language === "bn" ? "বৃত্ত ও স্পর্শক সংক্রান্ত প্রাথমিক ধারণা" : "Circles & Tangents",
+          en: "Circles & Tangents",
+        },
+        {
+          name: language === "bn" ? "ক্ষেত্রফল ও কোণ গণনা পদ্ধতি" : "Area & Angle Calculations",
+          en: "Area & Angle Calculations",
+        },
+        {
+          name: language === "bn" ? "পিথাগোরাস উপপাদ্য ও এর বাস্তব প্রয়োগ" : "Pythagorean Theorem & Proofs",
+          en: "Pythagorean Theorem & Proofs",
+        },
       ],
-      tagline: "অলিম্পিয়াড স্পেশাল: চিত্রভিত্তিক যৌক্তিক প্রমাণ",
+      tagline:
+        language === "bn"
+          ? "অলিম্পিয়াড স্পেশাল: চিত্রভিত্তিক যৌক্তিক প্রমাণ"
+          : "Olympiad Special: Visual & Deductive Proofs",
     },
     {
       id: "pillar-alg",
-      pillarNo: "স্তম্ভ ০৩",
+      pillarNo: language === "bn" ? "স্তম্ভ ০৩" : "Pillar 03",
       pillarTag: "ALGEBRA & SEQUENCES",
-      title: "বীজগণিত ও প্যাটার্ন (Algebra & Sequences)",
-      subtitle: "ধারা, ক্রমান্বয় ও গাণিতিক আরোহ",
-      intro: "অজ্ঞাত রাশির রহস্যভেদ, সংখ্যা ক্রমের সূত্র আবিষ্কার এবং যৌক্তিক সিদ্ধান্তের ধাপে ধাপে অনুশীলন।",
+      title: t.mod3Title,
+      subtitle: language === "bn" ? "ধারা, ক্রমান্বয় ও গাণিতিক আরোহ" : "Sequences, Series & Induction",
+      intro: t.mod3Desc,
       icon: ChartLineUp,
       topics: [
-        { name: "ধারা ও সংখ্যা প্যাটার্ন বিশ্লেষণ", en: "Arithmetic & Geometric Sequences" },
-        { name: "ক্রমান্বয় ও যুক্তিভিত্তিক সম্পর্ক", en: "Logical Ordering & Series" },
-        { name: "সমীকরণ গঠন ও অজানা রাশির মান", en: "Equations & Variables" },
-        { name: "গাণিতিক আরোহ ও যুক্তিধারা", en: "Mathematical Induction Basics" },
+        {
+          name: language === "bn" ? "ধারা ও সংখ্যা প্যাটার্ন বিশ্লেষণ" : "Arithmetic & Geometric Sequences",
+          en: "Arithmetic & Geometric Sequences",
+        },
+        {
+          name: language === "bn" ? "ক্রমান্বয় ও যুক্তিভিত্তিক সম্পর্ক" : "Logical Ordering & Series",
+          en: "Logical Ordering & Series",
+        },
+        {
+          name: language === "bn" ? "সমীকরণ গঠন ও অজানা রাশির মান" : "Equations & Variables",
+          en: "Equations & Variables",
+        },
+        {
+          name: language === "bn" ? "গাণিতিক আরোহ ও যুক্তিধারা" : "Mathematical Induction Basics",
+          en: "Mathematical Induction Basics",
+        },
       ],
-      tagline: "অলিম্পিয়াড স্পেশাল: প্যাটার্ন দেখে সাধারণ সূত্র নির্ণয়",
+      tagline:
+        language === "bn"
+          ? "অলিম্পিয়াড স্পেশাল: প্যাটার্ন দেখে সাধারণ সূত্র নির্ণয়"
+          : "Olympiad Special: Discovering Patterns & General Formulas",
     },
     {
       id: "pillar-comb",
-      pillarNo: "স্তম্ভ ০৪",
+      pillarNo: language === "bn" ? "স্তম্ভ ০৪" : "Pillar 04",
       pillarTag: "COMBINATORICS & LOGIC",
-      title: "কম্বিনেটোরিক্স ও লজিক (Combinatorics & Logic)",
-      subtitle: "বিন্যাস, পায়রার খোপ নীতি ও পাজল",
-      intro: "যৌক্তিক চিন্তার চূড়ান্ত অনুশীলন—গণনার বৈজ্ঞানিক পদ্ধতি, কেস তৈরি এবং অলিম্পিয়াড ধাঁধার সমাধান।",
+      title: t.mod4Title,
+      subtitle: language === "bn" ? "বিন্যাস, পায়রার খোপ নীতি ও পাজল" : "Permutations, PHP & Puzzles",
+      intro: t.mod4Desc,
       icon: PuzzlePiece,
       topics: [
-        { name: "বিন্যাস ও সমাবেশ—সুশৃঙ্খল গণনা", en: "Permutations, Combinations & Counting" },
-        { name: "পায়রার খোপ নীতি (Pigeonhole Principle)", en: "PHP & Advanced Counting" },
-        { name: "গ্রিড ও পথ গণনার আধুনিক নিয়ম", en: "Grid Paths & Logical Reasoning" },
-        { name: "অলিম্পিয়াড পাজল ও বিশ্লেষণধর্মী ধাঁধা", en: "Olympiad Brain Teasers" },
+        {
+          name: language === "bn" ? "বিন্যাস ও সমাবেশ—সুশৃঙ্খল গণনা" : "Permutations, Combinations & Counting",
+          en: "Permutations, Combinations & Counting",
+        },
+        {
+          name: language === "bn" ? "পায়রার খোপ নীতি (Pigeonhole Principle)" : "PHP & Advanced Counting",
+          en: "PHP & Advanced Counting",
+        },
+        {
+          name: language === "bn" ? "গ্রিড ও পথ গণনার আধুনিক নিয়ম" : "Grid Paths & Logical Reasoning",
+          en: "Grid Paths & Logical Reasoning",
+        },
+        {
+          name: language === "bn" ? "অলিম্পিয়াড পাজল ও বিশ্লেষণধর্মী ধাঁধা" : "Olympiad Brain Teasers",
+          en: "Olympiad Brain Teasers",
+        },
       ],
-      tagline: "অলিম্পিয়াড স্পেশাল: পায়রার খোপ নীতি ও লজিক পাজল",
+      tagline:
+        language === "bn"
+          ? "অলিম্পিয়াড স্পেশাল: পায়রার খোপ নীতি ও লজিক পাজল"
+          : "Olympiad Special: Pigeonhole Principle & Logic Puzzles",
     },
   ];
 
@@ -121,15 +196,15 @@ export function Course() {
         <div className="max-w-3xl mb-12 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-blue-50 border border-blue-200 text-[#0072c6] text-xs font-bold tracking-wide uppercase">
             <Sparkle size={14} weight="fill" className="text-[#0072c6]" />
-            <span className="font-shadhinata">কোর্স কারিকুলাম ও অলিম্পিয়াডের ৪ ভিত্তি</span>
+            <span className="font-shadhinata">{t.courseTag}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-shadhinata font-bold text-slate-900 leading-tight">
-            অলিম্পিয়াডের ৪টি মূল স্তম্ভ ও পূর্ণাঙ্গ সিলেবাস
+            {t.courseTitle}
           </h2>
 
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            জাতীয় ও আঞ্চলিক প্রাইমারি গণিত অলিম্পিয়াডের স্ট্যান্ডার্ড অনুযায়ী প্রতিটি মডিউল তৈরি। অন্ধ মুখস্থ নয়—যুক্তির শক্তিতে চিন্তা করা, সমস্যা বিশ্লেষণ ও সমাধান করাই আমাদের একমাত্র লক্ষ্য।
+            {t.courseSubtitle}
           </p>
         </div>
       </Reveal>
@@ -165,7 +240,7 @@ export function Course() {
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs text-[#0072c6] font-semibold">
                   <CheckCircle size={14} weight="fill" className="text-[#0072c6]" />
-                  <span>কোর্সের অন্তর্ভুক্ত</span>
+                  <span>{language === "bn" ? "কোর্সের অন্তর্ভুক্ত" : "Included in Course"}</span>
                 </div>
               </div>
             );
@@ -181,12 +256,12 @@ export function Course() {
               SYLLABUS & MODULES
             </span>
             <h3 className="text-xl sm:text-2xl font-shadhinata font-bold text-slate-900">
-              পোস্টার কারিকুলাম: ৪টি অলিম্পিয়াড পিলার
+              {language === "bn" ? "পোস্টার কারিকুলাম: ৪টি অলিম্পিয়াড পিলার" : "Curriculum: 4 Olympiad Pillars"}
             </h3>
           </div>
           <span className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 bg-white px-3 py-1 rounded border border-slate-200">
             <BookOpen size={14} weight="bold" className="text-[#0072c6]" />
-            <span>প্রাইমারি ও জুনিয়র অলিম্পিয়াড স্ট্যান্ডার্ড</span>
+            <span>{language === "bn" ? "প্রাইমারি ও জুনিয়র অলিম্পিয়াড স্ট্যান্ডার্ড" : "Primary & Junior Olympiad Standard"}</span>
           </span>
         </div>
       </Reveal>
@@ -229,7 +304,7 @@ export function Course() {
                   {/* Topics List with Clean GonitZoggo Badges */}
                   <div className="space-y-2 mb-6">
                     <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-                      সিলেবাস ও মূল টপিকসমূহ:
+                      {language === "bn" ? "সিলেবাস ও মূল টপিকসমূহ:" : "Syllabus & Core Topics:"}
                     </div>
                     {pillar.topics.map((topic, tidx) => (
                       <div
@@ -260,7 +335,7 @@ export function Course() {
                     {pillar.tagline}
                   </span>
                   <span className="text-xs font-bold text-[#0072c6] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                    <span>মডিউল বিস্তারিত</span>
+                    <span>{language === "bn" ? "মডিউল বিস্তারিত" : "Module Details"}</span>
                     <ArrowRight size={13} weight="bold" />
                   </span>
                 </div>
@@ -275,13 +350,17 @@ export function Course() {
         <div className="mt-12 bg-white border border-slate-200 rounded-lg shadow-xs hover:shadow-md transition-all p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-blue-50 border border-blue-200 text-[#0072c6] text-xs font-bold font-shadhinata">
-              <span>প্রি-বুকিং অফার — সীমিত সিট</span>
+              <span>{language === "bn" ? "প্রি-বুকিং অফার — সীমিত সিট" : "Pre-Booking Offer — Limited Seats"}</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-shadhinata font-bold text-slate-900">
-              প্রাইমারি গণিত অলিম্পিয়াড প্রস্তুতিতে এখনই শুরু করো
+              {language === "bn"
+                ? "প্রাইমারি গণিত অলিম্পিয়াড প্রস্তুতিতে এখনই শুরু করো"
+                : "Start Your Primary Math Olympiad Prep Today"}
             </h3>
             <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
-              ৭+ ঘণ্টা লাইভ ক্লাস, রেকর্ডেড লেকচার, ২০+ পূর্ণাঙ্গ মক টেস্ট, প্র্যাকটিস শিট ও সমাধান ক্লাস—সবকিছু পাচ্ছো মাত্র ১৯৯ টাকায়।
+              {language === "bn"
+                ? "৭+ ঘণ্টা লাইভ ক্লাস, রেকর্ডেড লেকচার, ২০+ পূর্ণাঙ্গ মক টেস্ট, প্র্যাকটিস শিট ও সমাধান ক্লাস—সবকিছু পাচ্ছো মাত্র ১৯৯ টাকায়।"
+                : "7+ hours live classes, recorded lectures, 20+ full mock tests, practice sheets, and solution sessions—all for only 199 BDT."}
             </p>
           </div>
 
@@ -290,14 +369,18 @@ export function Course() {
               href="#prebook"
               className="w-full sm:w-auto px-6 py-3 rounded-md bg-[#0072c6] hover:bg-[#005a9e] active:bg-[#004e8a] text-white font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2"
             >
-              <span className="font-shadhinata text-base">এখনই প্রি-বুক করো (১৯৯৳)</span>
+              <span className="font-shadhinata text-base">
+                {language === "bn" ? "এখনই প্রি-বুক করো (১৯৯৳)" : "Pre-Book Now (199 BDT)"}
+              </span>
               <ArrowRight size={16} weight="bold" />
             </a>
             <Link
               href="/mock-tests"
               className="w-full sm:w-auto px-5 py-3 rounded-md bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 font-bold text-sm border border-slate-200 transition-all flex items-center justify-center gap-2"
             >
-              <span className="font-shadhinata text-base">ফ্রি মক টেস্ট দিন</span>
+              <span className="font-shadhinata text-base">
+                {language === "bn" ? "ফ্রি মক টেস্ট দিন" : "Take Free Mock Test"}
+              </span>
             </Link>
           </div>
         </div>
@@ -306,17 +389,30 @@ export function Course() {
       {/* Subtle Marquee Strip */}
       <div className="mt-14 overflow-hidden border-y border-slate-200 py-4 bg-white rounded-lg shadow-2xs">
         <div className="flex animate-marquee whitespace-nowrap text-[#0072c6] text-xs sm:text-sm font-bold uppercase tracking-wider gap-10 opacity-90">
-          {[
-            "সংখ্যাতত্ত্ব (Number Theory)",
-            "জ্যামিতি (Geometry)",
-            "বীজগণিত ও প্যাটার্ন (Algebra & Sequences)",
-            "কম্বিনেটোরিক্স ও লজিক (Combinatorics & Logic)",
-            "৭+ ঘণ্টা লাইভ ক্লাস",
-            "রেকর্ডেড লেকচার",
-            "প্র্যাকটিস শিট",
-            "সমাধান ক্লাস",
-            "Math Olympiad 2026",
-          ].map((tag, i) => (
+          {(language === "bn"
+            ? [
+                "সংখ্যাতত্ত্ব (Number Theory)",
+                "জ্যামিতি (Geometry)",
+                "বীজগণিত ও প্যাটার্ন (Algebra & Sequences)",
+                "কম্বিনেটোরিক্স ও লজিক (Combinatorics & Logic)",
+                "৭+ ঘণ্টা লাইভ ক্লাস",
+                "রেকর্ডেড লেকচার",
+                "প্র্যাকটিস শিট",
+                "সমাধান ক্লাস",
+                "Math Olympiad 2026",
+              ]
+            : [
+                "Number Theory",
+                "Geometry",
+                "Algebra & Sequences",
+                "Combinatorics & Logic",
+                "7+ Hours Live Classes",
+                "Recorded Lectures",
+                "Practice Sheets",
+                "Solution Sessions",
+                "Math Olympiad 2026",
+              ]
+          ).map((tag, i) => (
             <span key={i} className="flex items-center gap-6">
               <span className="font-shadhinata">{tag}</span>
               <span className="text-amber-500 font-black">•</span>

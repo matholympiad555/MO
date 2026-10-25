@@ -8,12 +8,9 @@ import {
   CheckCircle,
   Play,
   Pause,
-  Star,
   Copy,
   Check,
-  Sparkle,
   Phone,
-  Receipt,
   Ticket,
 } from "@phosphor-icons/react";
 import { useLanguage } from "@/lib/language-context";
@@ -95,18 +92,22 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
             {/* Pill: Course Pre-booking Active */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-amber-950 text-xs sm:text-sm font-bold shadow-2xs">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span>
-              <span>🔥 প্রাইমারি গণিত অলিম্পিয়াড প্রস্তুতি কোর্স ২০২৬ • প্রি-বুকিং চলছে!</span>
+              <span>
+                {language === "bn"
+                  ? "🔥 প্রাইমারি গণিত অলিম্পিয়াড প্রস্তুতি কোর্স ২০২৬ • প্রি-বুকিং চলছে!"
+                  : "🔥 Primary Math Olympiad Prep Course 2026 • Pre-Booking Live!"}
+              </span>
             </div>
 
             {/* Main Headline */}
             <div className="space-y-1">
               <h1 className="text-3xl sm:text-5xl lg:text-[3.8rem] font-black tracking-tight leading-[1.12]">
                 <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-800 bg-clip-text text-transparent">
-                  Tiger Math
+                  {t.heroTitle1}
                 </span>
                 <br />
                 <span className="text-slate-950 font-black">
-                  {language === "bn" ? "প্রাইমারি অলিম্পিয়াড প্রস্তুতি কোর্স" : "Primary Math Olympiad Prep 2026"}
+                  {t.heroTitle2}
                 </span>
               </h1>
             </div>
@@ -124,7 +125,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 </>
               ) : (
                 <>
-                  Master Math Olympiad with live interactive lectures, 2 full-length simulated mock tests, and 24/7 mentor doubt solving. Confirm your seat for only{" "}
+                  Master Math Olympiad with live interactive lectures, 2 full-length simulated mock tests, and 24/7 dedicated mentor doubt solving. Confirm your seat for only{" "}
                   <strong className="text-emerald-700 font-black">199 BDT (80% Off)</strong>!
                 </>
               )}
@@ -138,7 +139,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 className="px-6 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-black text-sm sm:text-base shadow-md shadow-emerald-600/20 active:scale-95 transition-all flex items-center gap-2"
               >
                 <Ticket size={18} weight="fill" />
-                <span>সরাসরি প্রি-বুক করো (১৯৯৳)</span>
+                <span>{t.heroDirectBookBtn}</span>
                 <ArrowRight size={16} weight="bold" />
               </a>
 
@@ -149,7 +150,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 className="px-5 py-3 rounded-full bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs sm:text-sm border border-slate-300 shadow-xs flex items-center gap-2 transition-all"
               >
                 <YoutubeLogo size={20} weight="fill" className="text-red-600" />
-                <span>ইউটিউব চ্যানেল (@BanglarMathOlympiad) ↗</span>
+                <span>{t.heroYoutubeBtn}</span>
               </a>
             </div>
 
@@ -157,19 +158,19 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2 text-xs font-bold text-slate-700">
               <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
                 <CheckCircle size={16} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>৭+ ঘণ্টা লাইভ ক্লাস</span>
+                <span>{t.heroLiveClasses}</span>
               </div>
               <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
                 <CheckCircle size={16} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>২টি পূর্ণাঙ্গ মক টেস্ট</span>
+                <span>{t.heroMockTests}</span>
               </div>
               <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
                 <CheckCircle size={16} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>রেকর্ডেড ভিডিও</span>
+                <span>{t.heroRecorded}</span>
               </div>
               <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
                 <CheckCircle size={16} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>কোর্স ফি মাত্র ১৯৯৳</span>
+                <span>{t.heroFeeNotice}</span>
               </div>
             </div>
           </div>
@@ -187,7 +188,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 }`}
               >
                 <Ticket size={15} weight="fill" />
-                <span>⚡ দ্রুত প্রি-বুকিং (১৯৯৳)</span>
+                <span>{t.tabBooking}</span>
               </button>
 
               <button
@@ -199,7 +200,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 }`}
               >
                 <Play size={14} weight="fill" />
-                <span>🎙️ লাইভ ক্লাস ডেমো</span>
+                <span>{t.tabAudio}</span>
               </button>
             </div>
 
@@ -210,17 +211,23 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 <div className="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
                   <div>
                     <span className="text-[10px] font-black uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200">
-                      অফিশিয়াল রেজিস্ট্রেশন
+                      {t.quickBookingHeader}
                     </span>
                     <h3 className="text-base font-black text-slate-900 mt-1 leading-snug">
-                      প্রাইমারি গণিত অলিম্পিয়াড ২০২৬
+                      {t.quickBookingTitle}
                     </h3>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="text-xs text-slate-400 line-through">১,০০০৳</span>
-                    <div className="text-xl font-black text-emerald-600 leading-none">১৯৯৳</div>
-                    <span className="text-[10px] font-bold text-emerald-700">৮০% ছাড়</span>
+                    <span className="text-xs text-slate-400 line-through">
+                      {language === "bn" ? "১,০০০৳" : "1,000 BDT"}
+                    </span>
+                    <div className="text-xl font-black text-emerald-600 leading-none">
+                      {language === "bn" ? "১৯৯৳" : "199 BDT"}
+                    </div>
+                    <span className="text-[10px] font-bold text-emerald-700">
+                      {language === "bn" ? "৮০% ছাড়" : "80% Off"}
+                    </span>
                   </div>
                 </div>
 
@@ -229,19 +236,19 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                   <div className="flex items-center justify-between text-amber-950 font-bold">
                     <span className="flex items-center gap-1.5">
                       <Phone size={14} className="text-amber-600" />
-                      <span>bKash Send Money:</span>
+                      <span>{t.quickBkashSendMoney}</span>
                     </span>
                     <button
                       onClick={handleCopyNum}
                       className="px-2 py-0.5 rounded bg-amber-200 hover:bg-amber-300 text-amber-900 font-bold flex items-center gap-1 transition-all cursor-pointer"
                     >
                       {copiedNum ? <Check size={12} weight="bold" /> : <Copy size={12} />}
-                      <span>{copiedNum ? "কপি হয়েছে!" : "01331366865"}</span>
+                      <span>{copiedNum ? (language === "bn" ? "কপি হয়েছে!" : "Copied!") : "01331366865"}</span>
                     </button>
                   </div>
 
                   <div className="flex items-center justify-between text-[11px] text-amber-900">
-                    <span>রেফারেন্স কোড (Reference):</span>
+                    <span>{t.quickRefCode}</span>
                     <button
                       onClick={handleCopyRef}
                       className="font-mono font-bold text-purple-800 bg-purple-100 px-1.5 py-0.2 rounded hover:bg-purple-200 transition-colors cursor-pointer"
@@ -257,10 +264,11 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                     <CheckCircle size={36} weight="fill" className="text-emerald-600 mx-auto" />
                     <div>
                       <div className="font-black text-slate-900 text-sm">
-                        প্রি-বুকিং আবেদন সফল হয়েছে! 🎉
+                        {t.quickSuccessTitle}
                       </div>
                       <p className="text-xs text-slate-600 mt-1">
-                        তোমার TrxID: <strong className="font-mono text-purple-700">{submittedTrx}</strong>
+                        {language === "bn" ? "তোমার TrxID: " : "Your TrxID: "}
+                        <strong className="font-mono text-purple-700">{submittedTrx}</strong>
                       </p>
                     </div>
 
@@ -268,7 +276,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                       href={`/status?query=${submittedTrx}`}
                       className="inline-flex items-center gap-1.5 text-xs font-bold bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-all"
                     >
-                      <span>লাইভ স্ট্যাটাস ট্র্যাক করো</span>
+                      <span>{t.quickLiveTrackBtn}</span>
                       <ArrowRight size={14} />
                     </Link>
                   </div>
@@ -278,7 +286,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                       <input
                         type="text"
                         required
-                        placeholder="শিক্ষার্থীর পূর্ণ নাম *"
+                        placeholder={t.quickNamePlaceholder}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none text-slate-900"
@@ -289,7 +297,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                       <input
                         type="tel"
                         required
-                        placeholder="মোবাইল নম্বর *"
+                        placeholder={t.quickPhonePlaceholder}
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none text-slate-900"
@@ -297,7 +305,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                       <input
                         type="text"
                         required
-                        placeholder="bKash TrxID *"
+                        placeholder={t.quickTrxPlaceholder}
                         value={formData.trxId}
                         onChange={(e) => setFormData({ ...formData, trxId: e.target.value.toUpperCase() })}
                         className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none text-slate-900 font-mono uppercase"
@@ -310,10 +318,10 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                       className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white font-black text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                     >
                       {loading ? (
-                        <span>যাচাই হচ্ছে...</span>
+                        <span>{language === "bn" ? "যাচাই হচ্ছে..." : "Verifying..."}</span>
                       ) : (
                         <>
-                          <span>সিট নিশ্চিত করো (১৯৯৳)</span>
+                          <span>{t.quickSubmitBtn}</span>
                           <ArrowRight size={16} weight="bold" />
                         </>
                       )}
@@ -324,7 +332,9 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                         href="#prebook"
                         className="text-[11px] text-purple-700 hover:underline font-semibold"
                       >
-                        বিস্তারিত প্রি-বুকিং ও পেমেন্ট গাইড দেখতে ক্লিক করো ↓
+                        {language === "bn"
+                          ? "বিস্তারিত প্রি-বুকিং ও পেমেন্ট গাইড দেখতে ক্লিক করো ↓"
+                          : "Click here for full pre-booking & payment guide ↓"}
                       </a>
                     </div>
                   </form>
@@ -340,9 +350,9 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                   <div className="space-y-0.5">
                     <div className="text-xs sm:text-sm font-bold text-slate-100 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-                      <span>BDMO National Camp Practice</span>
+                      <span>{t.heroDiscussionTitle}</span>
                     </div>
-                    <div className="text-[10px] text-slate-400">Live Problem Discussion</div>
+                    <div className="text-[10px] text-slate-400">{t.heroDiscussionLive}</div>
                   </div>
                   <div className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-800/80 text-amber-400 border border-slate-700">
                     00:05:39
@@ -363,11 +373,11 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 {/* Dialogue */}
                 <div className="bg-slate-800/90 border border-slate-700/80 rounded-xl p-3.5 space-y-2 text-xs">
                   <div className="flex items-center justify-between text-[11px]">
-                    <span className="font-bold text-slate-200">Tahmid (IMO Solver)</span>
+                    <span className="font-bold text-slate-200">{t.heroQuoteSolver}</span>
                     <span className="text-slate-400 font-mono">05:45</span>
                   </div>
                   <p className="text-slate-300 leading-relaxed font-sans text-[11px]">
-                    &ldquo;Apply Ptolemy&apos;s Theorem: <code className="text-amber-300">AC·BD = AB·CD + BC·DA</code> to find the diameter!&rdquo;
+                    &ldquo;{t.heroQuotePtolemy}&rdquo;
                   </p>
                 </div>
 

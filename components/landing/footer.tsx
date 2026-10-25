@@ -12,8 +12,10 @@ import {
   X,
   FileText,
 } from "@phosphor-icons/react";
+import { useLanguage } from "@/lib/language-context";
 
 export function Footer() {
+  const { t, language } = useLanguage();
   const [activeModal, setActiveModal] = useState<"privacy" | "terms" | "refund" | null>(null);
 
   const collaborators = [
@@ -41,13 +43,17 @@ export function Footer() {
           <div className="space-y-2 text-center md:text-left relative z-10 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-semibold backdrop-blur-xs">
               <span className="w-2 h-2 rounded-full bg-amber-400" />
-              <span>প্রি-বুকিং অফার চলছে</span>
+              <span>{language === "bn" ? "প্রি-বুকিং অফার চলছে" : "Pre-Booking Offer Active"}</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-shadhinata font-bold text-white tracking-tight leading-snug">
-              আজই তোমার অলিম্পিয়াড সিট নিশ্চিত করো!
+              {language === "bn"
+                ? "আজই তোমার অলিম্পিয়াড সিট নিশ্চিত করো!"
+                : "Secure Your Olympiad Seat Today!"}
             </h2>
             <p className="text-blue-100 text-xs sm:text-sm leading-relaxed">
-              কোর্স ফি মাত্র ১৯৯ টাকা! লাইভ ক্লাস, রেকর্ডিং, ২০+ মক টেস্ট ও সার্বক্ষণিক মেন্টরশিপের সুযোগ গ্রহণ করো।
+              {language === "bn"
+                ? "কোর্স ফি মাত্র ১৯৯ টাকা! লাইভ ক্লাস, রেকর্ডিং, ২০+ মক টেস্ট ও সার্বক্ষণিক মেন্টরশিপের সুযোগ গ্রহণ করো।"
+                : "Course fee only 199 BDT! Get live interactive classes, full recordings, 20+ mock tests, and 24/7 dedicated mentorship."}
             </p>
           </div>
 
@@ -55,8 +61,10 @@ export function Footer() {
             href="#prebook"
             className="px-7 py-3.5 bg-[#28a745] hover:bg-[#218838] active:bg-[#1e7e34] text-white rounded-xl font-shadhinata font-bold text-base shadow-lg transition-transform active:scale-95 shrink-0 relative z-10 flex items-center gap-2 border border-emerald-400/40"
           >
-            <span>প্রি-বুক করো</span>
-            <span className="bg-white/25 px-2 py-0.5 rounded text-xs font-mono font-bold">১৯৯৳</span>
+            <span>{language === "bn" ? "প্রি-বুক করো" : "Pre-Book Now"}</span>
+            <span className="bg-white/25 px-2 py-0.5 rounded text-xs font-mono font-bold">
+              {language === "bn" ? "১৯৯৳" : "199 BDT"}
+            </span>
             <ArrowRight size={16} weight="bold" />
           </a>
         </section>
@@ -68,10 +76,14 @@ export function Footer() {
               STEM & Olympiad Collaborators
             </span>
             <h3 className="text-lg sm:text-xl font-shadhinata font-bold text-white">
-              শীর্ষ অলিম্পিয়াড ও বিজ্ঞান ক্লাবের যৌথ সহযোগিতা
+              {language === "bn"
+                ? "শীর্ষ অলিম্পিয়াড ও বিজ্ঞান ক্লাবের যৌথ সহযোগিতা"
+                : "Joint Collaboration with Top Olympiad & Science Clubs"}
             </h3>
             <p className="text-xs text-slate-400 max-w-xl mx-auto">
-              বাংলাদেশের স্কুল-কলেজের শীর্ষ গণিত ও বিজ্ঞান ক্লাবের পারস্পরিক নেটওয়ার্কিং ও সহযাত্রী হিসেবে পরিচালিত
+              {language === "bn"
+                ? "বাংলাদেশের স্কুল-কলেজের শীর্ষ গণিত ও বিজ্ঞান ক্লাবের পারস্পরিক নেটওয়ার্কিং ও সহযাত্রী হিসেবে পরিচালিত"
+                : "Operated in collaboration with leading school and college math & science club networks in Bangladesh"}
             </p>
           </div>
 
@@ -89,7 +101,6 @@ export function Footer() {
                     className="max-h-8 max-w-[80%] object-contain filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all"
                     loading="lazy"
                     onError={(e) => {
-                      // Fallback text if cdn image fails
                       (e.target as HTMLElement).style.display = "none";
                     }}
                   />
@@ -115,40 +126,44 @@ export function Footer() {
               </div>
               <div>
                 <span className="font-shadhinata font-bold text-lg text-white block">
-                  {site.nameBn}
+                  {language === "bn" ? site.nameBn : "Tiger Math Bangladesh"}
                 </span>
                 <span className="text-[11px] text-slate-400">The Playground for Problem Solvers</span>
               </div>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-body">
-              গণিত অলিম্পিয়াডের প্রস্তুতিতে মুখস্থ নয়, যুক্তির শক্তিতে চিন্তা করতে শেখা। গণিতের সৌন্দর্য আবিষ্কারে তোমার সার্বক্ষণিক সঙ্গী।
+              {t.footerDesc}
             </p>
             <div className="flex items-center gap-2 text-xs text-emerald-400">
               <ShieldCheck size={18} weight="fill" />
-              <span>১০০% নিরাপদ ও স্বচ্ছ ভেরিফিকেশন ব্যবস্থা</span>
+              <span>
+                {language === "bn"
+                  ? "১০০% নিরাপদ ও স্বচ্ছ ভেরিফিকেশন ব্যবস্থা"
+                  : "100% Secure & Transparent Verification"}
+              </span>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-white font-shadhinata font-bold text-sm tracking-wide">
-              জরুরি লিঙ্ক ও প্ল্যাটফর্ম
+              {t.footerQuickLinks}
             </h4>
             <div className="flex flex-col space-y-2 text-xs text-slate-400">
               <Link href="/mock-tests" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
-                <span>• অনলাইন মক টেস্ট পোর্টাল</span>
+                <span>{language === "bn" ? "• অনলাইন মক টেস্ট পোর্টাল" : "• Online Mock Test Portal"}</span>
               </Link>
               <Link href="/qa" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
-                <span>• প্রশ্নোত্তর ফোরাম (Q&A)</span>
+                <span>{language === "bn" ? "• প্রশ্নোত্তর ফোরাম (Q&A)" : "• Q&A Discussion Forum"}</span>
               </Link>
               <Link href="/status" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
-                <span>• বুকিং ভেরিফিকেশন স্ট্যাটাস</span>
+                <span>{language === "bn" ? "• বুকিং ভেরিফিকেশন স্ট্যাটাস" : "• Booking Verification Status"}</span>
               </Link>
               <a href="#course" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
-                <span>• কোর্স কারিকুলাম ও সিলেবাস</span>
+                <span>{language === "bn" ? "• কোর্স কারিকুলাম ও সিলেবাস" : "• Course Curriculum & Syllabus"}</span>
               </a>
               <a href="#teacher" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
-                <span>• মেন্টর প্যানেল ও প্রশিক্ষক</span>
+                <span>{language === "bn" ? "• মেন্টর প্যানেল ও প্রশিক্ষক" : "• Instructors & Mentors Panel"}</span>
               </a>
             </div>
           </div>
@@ -156,7 +171,7 @@ export function Footer() {
           {/* Helpline & Payment */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-white font-shadhinata font-bold text-sm tracking-wide">
-              হেল্পলাইন ও পেমেন্ট
+              {t.footerHelpline}
             </h4>
             <div className="text-xs text-slate-400 space-y-2">
               <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1">
@@ -165,7 +180,8 @@ export function Footer() {
                   +8801331366865
                 </div>
                 <div className="text-[10px] text-slate-400">
-                  রেফারেন্স: <span className="text-white font-bold font-mono">PRE_BOOK</span>
+                  {language === "bn" ? "রেফারেন্স: " : "Reference: "}
+                  <span className="text-white font-bold font-mono">PRE_BOOK</span>
                 </div>
               </div>
 
@@ -184,7 +200,9 @@ export function Footer() {
                   className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
                 >
                   <PhoneCall size={16} weight="fill" />
-                  <span>হেল্পলাইন: ০১৩৩১-৩৬৬৮৬৫</span>
+                  <span>
+                    {language === "bn" ? "হেল্পলাইন: ০১৩৩১-৩৬৬৮৬৫" : "Helpline: +8801331366865"}
+                  </span>
                 </a>
               </div>
             </div>
@@ -193,26 +211,26 @@ export function Footer() {
           {/* Legal & Admin */}
           <div className="md:col-span-2 space-y-3">
             <h4 className="text-white font-shadhinata font-bold text-sm tracking-wide">
-              পলিসি ও অ্যাডমিন
+              {language === "bn" ? "পলিসি ও অ্যাডমিন" : "Policies & Admin"}
             </h4>
             <div className="flex flex-col space-y-2 text-xs text-slate-400">
               <button
                 onClick={() => setActiveModal("privacy")}
-                className="text-left hover:text-amber-400 transition-colors"
+                className="text-left hover:text-amber-400 transition-colors cursor-pointer"
               >
-                গোপনীয়তা নীতি (Privacy)
+                {language === "bn" ? "গোপনীয়তা নীতি (Privacy)" : "Privacy Policy"}
               </button>
               <button
                 onClick={() => setActiveModal("terms")}
-                className="text-left hover:text-amber-400 transition-colors"
+                className="text-left hover:text-amber-400 transition-colors cursor-pointer"
               >
-                ব্যবহারের নিয়মাবলি (Terms)
+                {language === "bn" ? "ব্যবহারের নিয়মাবলি (Terms)" : "Terms of Service"}
               </button>
               <button
                 onClick={() => setActiveModal("refund")}
-                className="text-left hover:text-amber-400 transition-colors"
+                className="text-left hover:text-amber-400 transition-colors cursor-pointer"
               >
-                রিফান্ড ও পেমেন্ট পলিসি
+                {language === "bn" ? "রিফান্ড ও পেমেন্ট পলিসি" : "Refund & Payment Policy"}
               </button>
               <div className="pt-2">
                 <Link
@@ -220,7 +238,7 @@ export function Footer() {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold transition-all"
                 >
                   <LockKey size={13} weight="bold" />
-                  <span>অ্যাডমিন পোর্টাল</span>
+                  <span>{t.adminPortal}</span>
                 </Link>
               </div>
             </div>
@@ -230,7 +248,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <div>
-            © ২০২৬ {site.nameBn}। সর্বস্বত্ব সংরক্ষিত।
+            {t.footerCopyright}
           </div>
           <div className="flex items-center gap-4">
             <span>Powered by GonitZoggo Portal Engine</span>
@@ -246,7 +264,7 @@ export function Footer() {
           <div className="bg-white text-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl relative border border-slate-200">
             <button
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors"
+              className="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
             >
               <X size={20} weight="bold" />
             </button>
@@ -256,9 +274,12 @@ export function Footer() {
                 <FileText size={22} weight="bold" />
               </div>
               <h3 className="text-xl font-shadhinata font-bold text-slate-900">
-                {activeModal === "privacy" && "গোপনীয়তা নীতি (Privacy Policy)"}
-                {activeModal === "terms" && "ব্যবহারের শর্তাবলি (Terms of Service)"}
-                {activeModal === "refund" && "রিফান্ড ও পেমেন্ট নীতিমালা"}
+                {activeModal === "privacy" &&
+                  (language === "bn" ? "গোপনীয়তা নীতি (Privacy Policy)" : "Privacy Policy")}
+                {activeModal === "terms" &&
+                  (language === "bn" ? "ব্যবহারের শর্তাবলি (Terms of Service)" : "Terms of Service")}
+                {activeModal === "refund" &&
+                  (language === "bn" ? "রিফান্ড ও পেমেন্ট নীতিমালা" : "Refund & Payment Policy")}
               </h3>
             </div>
 
@@ -266,13 +287,21 @@ export function Footer() {
               {activeModal === "privacy" && (
                 <>
                   <p>
-                    আমরা শিক্ষার্থীদের তথ্যের সর্বোচ্চ সুরক্ষা ও গোপনীয়তা বজায় রাখতে প্রতিশ্রুতিবদ্ধ।
+                    {language === "bn"
+                      ? "আমরা শিক্ষার্থীদের তথ্যের সর্বোচ্চ সুরক্ষা ও গোপনীয়তা বজায় রাখতে প্রতিশ্রুতিবদ্ধ।"
+                      : "We are committed to maintaining the highest security and privacy for students' personal information."}
                   </p>
                   <p>
-                    <strong>তথ্য সংগ্রহ:</strong> রেজিস্ট্রেশন ও পেমেন্ট ভেরিফিকেশনের জন্য শিক্ষার্থীর নাম, শ্রেণি, স্কুল এবং বিকাশ ট্রানজেকশন আইডি সংগ্রহ করা হয়।
+                    <strong>{language === "bn" ? "তথ্য সংগ্রহ: " : "Data Collection: "}</strong>
+                    {language === "bn"
+                      ? "রেজিস্ট্রেশন ও পেমেন্ট ভেরিফিকেশনের জন্য শিক্ষার্থীর নাম, শ্রেণি, স্কুল এবং বিকাশ ট্রানজেকশন আইডি সংগ্রহ করা হয়।"
+                      : "We collect student name, grade, school, and bKash transaction ID exclusively for registration and verification."}
                   </p>
                   <p>
-                    <strong>তথ্যের ব্যবহার:</strong> সংগৃহীত কোনো তথ্য কোনো তৃতীয় পক্ষের কাছে হস্তান্তর বা বিক্রি করা হয় না। শুধুমাত্র ক্লাস লিংক ও নোটিফিকেশনের প্রয়োজনে ব্যবহার করা হয়।
+                    <strong>{language === "bn" ? "তথ্যের ব্যবহার: " : "Data Usage: "}</strong>
+                    {language === "bn"
+                      ? "সংগৃহীত কোনো তথ্য কোনো তৃতীয় পক্ষের কাছে হস্তান্তর বা বিক্রি করা হয় না। শুধুমাত্র ক্লাস লিংক ও নোটিফিকেশনের প্রয়োজনে ব্যবহার করা হয়।"
+                      : "No collected data is shared with or sold to third parties. Information is used solely for class access and notifications."}
                   </p>
                 </>
               )}
@@ -280,13 +309,19 @@ export function Footer() {
               {activeModal === "terms" && (
                 <>
                   <p>
-                    ১. প্রি-বুকিং সম্পূর্ণ করার পর শিক্ষার্থীকে নির্ধারিত ব্যাচে অন্তর্ভুক্ত করা হবে।
+                    {language === "bn"
+                      ? "১. প্রি-বুকিং সম্পূর্ণ করার পর শিক্ষার্থীকে নির্ধারিত ব্যাচে অন্তর্ভুক্ত করা হবে।"
+                      : "1. Upon pre-booking submission, students will be assigned to their designated batch."}
                   </p>
                   <p>
-                    ২. ক্লাসের রেকর্ডিং ও স্টাডি মেটেরিয়াল ব্যক্তিগত অনুশীলনের জন্য সংরক্ষিত। এটি বাণিজ্যিকভাবে বিতরণ বা পুনরায় প্রকাশ নিষিদ্ধ।
+                    {language === "bn"
+                      ? "২. ক্লাসের রেকর্ডিং ও স্টাডি মেটেরিয়াল ব্যক্তিগত অনুশীলনের জন্য সংরক্ষিত। এটি বাণিজ্যিকভাবে বিতরণ বা পুনরায় প্রকাশ নিষিদ্ধ।"
+                      : "2. Class recordings and study materials are for personal student study only. Commercial distribution is strictly prohibited."}
                   </p>
                   <p>
-                    ৩. ক্লাসে সৌহার্দ্যপূর্ণ আচরণ ও শিক্ষণবান্ধব পরিবেশ বজায় রাখা সকল শিক্ষার্থীর দায়িত্ব।
+                    {language === "bn"
+                      ? "৩. ক্লাসে সৌহার্দ্যপূর্ণ আচরণ ও শিক্ষণবান্ধব পরিবেশ বজায় রাখা সকল শিক্ষার্থীর দায়িত্ব।"
+                      : "3. Students are expected to maintain respect and a positive learning environment during all interactive live sessions."}
                   </p>
                 </>
               )}
@@ -294,13 +329,19 @@ export function Footer() {
               {activeModal === "refund" && (
                 <>
                   <p>
-                    ১. সঠিক TrxID দিয়ে সাবমিট করার পর দ্রুততম সময়ে আপনার পেমেন্ট ভেরিফাই করা হবে।
+                    {language === "bn"
+                      ? "১. সঠিক TrxID দিয়ে সাবমিট করার পর দ্রুততম সময়ে আপনার পেমেন্ট ভেরিফাই করা হবে।"
+                      : "1. Payments are verified promptly upon submitting a valid bKash TrxID."}
                   </p>
                   <p>
-                    ২. যদি কোনো শিক্ষার্থী ভুলবশত অতিরিক্ত টাকা প্রদান করে, তবে আমাদের হেল্পলাইনে (+8801331366865) প্রমাণসহ জানালে ২৪ ঘণ্টার মধ্যে অতিরিক্ত অর্থ ফেরত দেওয়া হবে।
+                    {language === "bn"
+                      ? "২. যদি কোনো শিক্ষার্থী ভুলবশত অতিরিক্ত টাকা প্রদান করে, তবে আমাদের হেল্পলাইনে (+8801331366865) প্রমাণসহ জানালে ২৪ ঘণ্টার মধ্যে অতিরিক্ত অর্থ ফেরত দেওয়া হবে।"
+                      : "2. In case of duplicate or excess payment, contact our helpline (+8801331366865) with proof for a full excess refund within 24 hours."}
                   </p>
                   <p>
-                    ৩. ক্লাস শুরুর পূর্বে কোনো শিক্ষার্থী যৌক্তিক কারণে কোর্স ত্যাগ করতে চাইলে হেল্পলাইনে যোগাযোগ করতে পারে।
+                    {language === "bn"
+                      ? "৩. ক্লাস শুরুর পূর্বে কোনো শিক্ষার্থী যৌক্তিক কারণে কোর্স ত্যাগ করতে চাইলে হেল্পলাইনে যোগাযোগ করতে পারে।"
+                      : "3. If a student needs to withdraw prior to the start of classes due to valid reasons, please reach out to our helpline."}
                   </p>
                 </>
               )}
@@ -308,9 +349,9 @@ export function Footer() {
 
             <button
               onClick={() => setActiveModal(null)}
-              className="w-full py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition-colors"
+              className="w-full py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition-colors cursor-pointer"
             >
-              বন্ধ করুন
+              {language === "bn" ? "বন্ধ করুন" : "Close"}
             </button>
           </div>
         </div>

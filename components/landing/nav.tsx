@@ -9,7 +9,6 @@ import {
   Trophy,
   Flame,
   YoutubeLogo,
-  Globe,
   CaretDown,
   GraduationCap,
   BookOpen,
@@ -51,18 +50,18 @@ export function Nav({
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4 flex-nowrap">
         {/* Brand Logo - Only section allowed to have 2 lines */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center text-2xl shadow-sm group-hover:scale-105 transition-transform shrink-0">
             <span>🐯</span>
           </div>
-          <div className="leading-tight">
+          <div className="leading-tight shrink-0">
             <div className="flex items-center gap-1.5 whitespace-nowrap">
-              <span className="font-display font-black text-xl sm:text-2xl tracking-tight text-slate-900 group-hover:text-purple-600 transition-colors">
+              <span className="font-display font-black text-xl sm:text-2xl tracking-tight text-slate-900 group-hover:text-purple-600 transition-colors whitespace-nowrap">
                 Tiger <span className="text-purple-600">Math</span>
               </span>
-              <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-1.5 py-0.2 rounded-full tracking-wide">
+              <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-1.5 py-0.2 rounded-full tracking-wide shrink-0 whitespace-nowrap">
                 BDMO
               </span>
             </div>
@@ -73,57 +72,57 @@ export function Nav({
         </Link>
 
         {/* Desktop Navigation Links - Clean, Uncrowded & Strictly Single-Lined */}
-        <nav className="hidden lg:flex items-center gap-1 text-[13px] font-bold text-slate-700 whitespace-nowrap">
+        <nav className="hidden lg:flex items-center gap-1 text-[13px] font-bold text-slate-700 whitespace-nowrap shrink-0">
           <Link
             href="/"
-            className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-900 hover:bg-slate-200 transition-colors whitespace-nowrap"
+            className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-900 hover:bg-slate-200 transition-colors whitespace-nowrap shrink-0"
           >
             {t.navHome}
           </Link>
 
           <Link
             href="/problems"
-            className="px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center gap-1.5 whitespace-nowrap"
+            className="px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0"
           >
             <span>{t.navMath}</span>
-            <span className="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.2 rounded-full font-black">
+            <span className="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.2 rounded-full font-black shrink-0">
               ১০০০+
             </span>
           </Link>
 
           <Link
             href="/physics"
-            className="px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center gap-1.5 whitespace-nowrap"
+            className="px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0"
           >
             <span>{t.navPhysics}</span>
-            <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.2 rounded-full font-black">
+            <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.2 rounded-full font-black shrink-0">
               ১০০
             </span>
           </Link>
 
           <Link
             href="/mock-tests"
-            className="px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors whitespace-nowrap"
+            className="px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors whitespace-nowrap shrink-0"
           >
             {t.navMockTests}
           </Link>
 
           <Link
             href="/leaderboard"
-            className="px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors whitespace-nowrap"
+            className="px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors whitespace-nowrap shrink-0"
           >
             {t.navLeaderboard}
           </Link>
 
           {/* Clean 'More' Dropdown Menu (Prevents navbar crowding) */}
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative shrink-0" ref={dropdownRef}>
             <button
               onClick={() => setIsMoreOpen(!isMoreOpen)}
-              className={`px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-all flex items-center gap-1 whitespace-nowrap cursor-pointer ${
+              className={`px-3 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-all flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer ${
                 isMoreOpen ? "bg-purple-50 text-purple-700" : ""
               }`}
             >
-              <span>{language === "bn" ? "আরও" : "More"}</span>
+              <span>{t.navMore}</span>
               <CaretDown
                 size={14}
                 weight="bold"
@@ -176,7 +175,7 @@ export function Nav({
                   className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-purple-700 hover:bg-purple-50 transition-colors text-xs font-bold whitespace-nowrap"
                 >
                   <MagnifyingGlass size={18} className="text-slate-500 shrink-0" weight="bold" />
-                  <span>{language === "bn" ? "বুকিং স্ট্যাটাস চেক" : "Check Booking Status"}</span>
+                  <span>{t.statusCheck}</span>
                 </Link>
 
                 <div className="border-t border-slate-100 my-1 pt-1">
@@ -197,7 +196,7 @@ export function Nav({
                     className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors text-[11px] font-semibold whitespace-nowrap"
                   >
                     <Shield size={15} />
-                    <span>অ্যাডমিন পোর্টাল</span>
+                    <span>{t.adminPortal}</span>
                   </Link>
                 </div>
               </div>
@@ -205,38 +204,63 @@ export function Nav({
           </div>
         </nav>
 
-        {/* Right Actions: Compact, Single-Lined & Polished */}
+        {/* Right Actions: Slider Toggle, Tiger AI, Points & Prebook */}
         <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 whitespace-nowrap">
-          {/* Language Switcher Pill */}
+          {/* Animated Language Slider Switch (বাং | EN) */}
           <button
+            type="button"
+            role="switch"
+            aria-checked={language === "en"}
+            aria-label={language === "bn" ? "Switch to English" : "বাংলায় দেখুন"}
             onClick={() => setLanguage(language === "bn" ? "en" : "bn")}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 text-xs font-bold transition-all cursor-pointer whitespace-nowrap shadow-2xs"
-            title="Switch Language (বাংলা / English)"
+            className="relative flex items-center bg-slate-200 hover:bg-slate-300 p-0.5 rounded-full cursor-pointer select-none transition-colors border border-slate-300/80 w-[64px] h-7 shrink-0 focus:outline-hidden focus:ring-2 focus:ring-purple-400 focus:ring-offset-1"
+            title={language === "bn" ? "Switch to English" : "বাংলায় দেখুন"}
           >
-            <Globe size={14} weight="bold" className="text-purple-600" />
-            <span className="whitespace-nowrap">{language === "bn" ? "EN" : "বাংলা"}</span>
+            {/* Sliding Pill */}
+            <span
+              aria-hidden="true"
+              className={`absolute top-0.5 bottom-0.5 left-0.5 w-[29px] bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full shadow-sm transition-transform duration-200 ease-out pointer-events-none ${
+                language === "en" ? "translate-x-[31px]" : "translate-x-0"
+              }`}
+            />
+            <span
+              className={`relative flex-1 text-[11px] font-black text-center z-10 transition-colors select-none whitespace-nowrap ${
+                language === "bn" ? "text-white" : "text-slate-700"
+              }`}
+            >
+              বাং
+            </span>
+            <span
+              className={`relative flex-1 text-[11px] font-black text-center z-10 transition-colors select-none whitespace-nowrap ${
+                language === "en" ? "text-white" : "text-slate-700"
+              }`}
+            >
+              EN
+            </span>
           </button>
 
           {/* Tiger AI Button */}
           <button
+            type="button"
             onClick={onOpenHalumAI}
-            className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white text-xs sm:text-sm font-bold shadow-sm hover:shadow active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+            className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white text-xs sm:text-sm font-bold shadow-sm hover:shadow active:scale-95 transition-all cursor-pointer whitespace-nowrap shrink-0"
           >
-            <Sparkle size={15} weight="fill" className="text-amber-300" />
+            <Sparkle size={15} weight="fill" className="text-amber-300 shrink-0" />
             <span className="whitespace-nowrap">Tiger AI</span>
           </button>
 
           {/* Points & Streak Combined Pill (Compact & Clickable for Cashout) */}
           <button
+            type="button"
             onClick={onOpenCashout}
             title={t.cashoutTitle}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-2xs whitespace-nowrap"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-2xs whitespace-nowrap shrink-0"
           >
             <Trophy size={16} weight="fill" className="text-amber-500 shrink-0" />
             <span className="whitespace-nowrap font-mono">{points} pts</span>
             <span className="text-amber-300 font-normal">|</span>
-            <span className="flex items-center gap-0.5 text-orange-600 font-bold whitespace-nowrap">
-              <Flame size={14} weight="fill" />
+            <span className="flex items-center gap-0.5 text-orange-600 font-bold whitespace-nowrap shrink-0">
+              <Flame size={14} weight="fill" className="shrink-0" />
               <span>{streak}</span>
             </span>
           </button>
@@ -244,17 +268,18 @@ export function Nav({
           {/* Direct Prebook Pill (199৳) */}
           <a
             href="#hero-booking"
-            className="hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow-xs active:scale-95 transition-all whitespace-nowrap"
+            className="hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow-xs active:scale-95 transition-all whitespace-nowrap shrink-0"
             title="প্রি-বুকিং করো (১৯৯৳)"
           >
-            <span>১৯৯৳</span>
-            <span className="text-[10px] font-normal opacity-90">বুকিং</span>
+            <span className="whitespace-nowrap">১৯৯৳</span>
+            <span className="text-[10px] font-normal opacity-90 whitespace-nowrap">{language === "bn" ? "বুকিং" : "Book"}</span>
           </a>
 
           {/* Mobile Menu Hamburger */}
           <button
+            type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+            className="lg:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
@@ -266,12 +291,28 @@ export function Nav({
       {isOpen && (
         <div className="lg:hidden border-t border-slate-200 bg-white p-4 space-y-3 shadow-lg">
           <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-            <span className="text-xs font-bold text-slate-500">ভাষা / Language:</span>
+            <span className="text-xs font-bold text-slate-500 whitespace-nowrap">ভাষা / Language:</span>
+            {/* Animated Slider Switch in Mobile Drawer */}
             <button
+              type="button"
+              role="switch"
+              aria-checked={language === "en"}
+              aria-label={language === "bn" ? "Switch to English" : "বাংলায় দেখুন"}
               onClick={() => setLanguage(language === "bn" ? "en" : "bn")}
-              className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 font-bold text-xs border border-purple-200"
+              className="relative flex items-center bg-slate-200 hover:bg-slate-300 p-0.5 rounded-full cursor-pointer select-none transition-colors border border-slate-300 w-[64px] h-7 shrink-0 focus:outline-hidden focus:ring-2 focus:ring-purple-400"
             >
-              🌐 {language === "bn" ? "Switch to English" : "বাংলায় দেখুন"}
+              <span
+                aria-hidden="true"
+                className={`absolute top-0.5 bottom-0.5 left-0.5 w-[29px] bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full shadow-sm transition-transform duration-200 ease-out pointer-events-none ${
+                  language === "en" ? "translate-x-[31px]" : "translate-x-0"
+                }`}
+              />
+              <span className={`relative flex-1 text-[11px] font-black text-center z-10 transition-colors select-none whitespace-nowrap ${language === "bn" ? "text-white" : "text-slate-700"}`}>
+                বাং
+              </span>
+              <span className={`relative flex-1 text-[11px] font-black text-center z-10 transition-colors select-none whitespace-nowrap ${language === "en" ? "text-white" : "text-slate-700"}`}>
+                EN
+              </span>
             </button>
           </div>
 
@@ -344,7 +385,7 @@ export function Nav({
               onClick={() => setIsOpen(false)}
               className="p-2.5 rounded-xl bg-slate-50 text-slate-900 hover:bg-purple-50 whitespace-nowrap"
             >
-              🔍 স্ট্যাটাস চেক
+              🔍 {t.statusCheck}
             </Link>
           </div>
 
@@ -365,7 +406,7 @@ export function Nav({
               }}
               className="text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full whitespace-nowrap"
             >
-              ক্যাশআউট: ১০০৳ bKash
+              {language === "bn" ? "ক্যাশআউট: ১০০৳ bKash" : "Cashout: 100 BDT"}
             </button>
           </div>
         </div>

@@ -1,5 +1,15 @@
 import { NextResponse } from "next/server";
 import { store } from "@/lib/store";
+import { createClient } from "@supabase/supabase-js";
+
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (url && key) {
+    return createClient(url, key);
+  }
+  return null;
+}
 
 export async function GET(request: Request) {
   try {
@@ -13,7 +23,27 @@ export async function GET(request: Request) {
       );
     }
 
-    const booking = store.findBookingByQuery(query);
+    const cleanQuery = query.trim();
+
+    // 1. Try Supabase first
+    const supabase = getSupabase();
+    if (supabase) {
+      const { data, error } = await supabase
+        .from("bookings")
+        .select("*")
+        .or(`transaction_id.ilike.${cleanQuery},phone.eq.${cleanQuery},bkash_number.eq.${cleanQuery}`)
+        .limit(1);
+
+      if (!error && data && data.length > 0) {
+        return NextResponse.json({
+          success: true,
+          data: data[0],
+        });
+      }
+    }
+
+    // 2. Fall back to local store
+    const booking = store.findBookingByQuery(cleanQuery);
 
     if (!booking) {
       return NextResponse.json(
