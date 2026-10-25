@@ -1,207 +1,288 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import {
   List,
   X,
-  Shield,
+  Sparkle,
   Trophy,
-  PuzzlePiece,
+  Flame,
+  Lightning,
+  User,
+  YoutubeLogo,
+  GraduationCap,
+  GameController,
+  BookOpen,
   ChatsCircle,
-  MagnifyingGlass,
-  ArrowRight,
-  Phone,
-  CheckCircle,
 } from "@phosphor-icons/react";
-import { site } from "@/lib/content";
 
-export function Nav() {
+interface NavProps {
+  points?: number;
+  streak?: number;
+  onOpenHalumAI?: () => void;
+  onOpenCashout?: () => void;
+}
+
+export function Nav({
+  points = 120,
+  streak = 4,
+  onOpenHalumAI,
+  onOpenCashout,
+}: NavProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [isOpen]);
-
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#0072c6] text-white shadow-md transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand Logo - GonitZoggo Style */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-lg bg-white/15 border border-white/25 text-white flex items-center justify-center font-black text-xl shadow-inner group-hover:bg-white/25 transition-all">
-            <span className="text-amber-300 font-serif">∑</span>
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+      <div className="max-w-[1400px] mx-auto px-3 sm:px-6 h-18 flex items-center justify-between gap-3">
+        {/* Brand Logo - Tiger Math (Exact Image 4) */}
+        <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center text-2xl shadow-sm group-hover:scale-105 transition-transform">
+            <span>🐯</span>
           </div>
           <div className="leading-tight">
-            <div className="font-shadhinata font-bold text-white tracking-normal text-lg sm:text-xl flex items-center gap-2">
-              <span>বাংলার ম্যাথ অলিম্পিয়াড</span>
+            <div className="flex items-center gap-2">
+              <span className="font-display font-black text-xl sm:text-2xl tracking-tight text-slate-900 group-hover:text-purple-600 transition-colors">
+                Tiger <span className="text-purple-600">Math</span>
+              </span>
+              <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-2 py-0.5 rounded-full tracking-wide">
+                BDMO
+              </span>
             </div>
-            <div className="text-[10px] text-blue-100 font-medium tracking-wide hidden sm:block">
-              The Playground for Math Olympiad Solvers
+            <div className="text-[11px] font-semibold text-slate-500 tracking-normal">
+              বাংলার গণিত অলিম্পিয়াড
             </div>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links - GonitZoggo Style */}
-        <nav className="hidden lg:flex items-center gap-1">
+        {/* Desktop Navigation Links (Exact from Image 4) */}
+        <nav className="hidden xl:flex items-center gap-1 text-[13px] font-bold text-slate-700">
+          <Link
+            href="/"
+            className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-900 hover:bg-slate-200 transition-colors"
+          >
+            হোম
+          </Link>
+          <Link
+            href="/problems"
+            className="px-2.5 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center gap-1"
+          >
+            <span>গণিত</span>
+            <span className="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.2 rounded-full font-black">
+              ১০০০+
+            </span>
+          </Link>
+          <Link
+            href="/physics"
+            className="px-2.5 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center gap-1"
+          >
+            <span>পদার্থ</span>
+            <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.2 rounded-full font-black">
+              ১০০
+            </span>
+          </Link>
+          <Link
+            href="/leaderboard"
+            className="px-2.5 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors"
+          >
+            লিডারবোর্ড
+          </Link>
+          <a
+            href="https://www.youtube.com/@BanglarMathOlympiad"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-2.5 py-1.5 rounded-full text-rose-600 hover:bg-rose-50 transition-colors flex items-center gap-1 font-semibold"
+          >
+            <YoutubeLogo size={16} weight="fill" className="text-red-600" />
+            <span>ইউটিউব</span>
+          </a>
           <Link
             href="/#course"
-            className="flex items-center gap-1.5 text-white/90 hover:text-white hover:bg-white/10 px-3.5 py-2 rounded-md text-sm font-medium transition-all"
+            className="px-2.5 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center gap-1"
           >
-            <PuzzlePiece size={16} weight="bold" />
-            <span>কোর্স ও সমস্যা</span>
+            <span>কোর্স ও শিক্ষক</span>
+            <span>🎓</span>
+          </Link>
+          <Link
+            href="/resources"
+            className="px-2.5 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors"
+          >
+            BDMO রিসোর্স
           </Link>
           <Link
             href="/mock-tests"
-            className="flex items-center gap-1.5 text-white/90 hover:text-white hover:bg-white/10 px-3.5 py-2 rounded-md text-sm font-medium transition-all"
+            className="px-2.5 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors"
           >
-            <Trophy size={16} weight="bold" />
-            <span>মক টেস্ট</span>
-            <span className="px-1.5 py-0.2 text-[10px] font-bold bg-amber-400 text-slate-900 rounded-full">
-              লাইভ
-            </span>
+            মক টেস্ট
+          </Link>
+          <Link
+            href="/sudoku"
+            className="px-2.5 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors flex items-center gap-1"
+          >
+            <span>সুডোকু</span>
+            <span>🎮</span>
           </Link>
           <Link
             href="/qa"
-            className="flex items-center gap-1.5 text-white/90 hover:text-white hover:bg-white/10 px-3.5 py-2 rounded-md text-sm font-medium transition-all"
+            className="px-2.5 py-1.5 rounded-full hover:text-purple-600 hover:bg-purple-50 transition-colors"
           >
-            <ChatsCircle size={16} weight="bold" />
-            <span>কমিউনিটি Q&A</span>
-          </Link>
-          <Link
-            href="/status"
-            className="flex items-center gap-1.5 text-white/90 hover:text-white hover:bg-white/10 px-3.5 py-2 rounded-md text-sm font-medium transition-all"
-          >
-            <MagnifyingGlass size={16} weight="bold" />
-            <span>স্ট্যাটাস চেক</span>
+            প্রশ্নোত্তর ফোরাম
           </Link>
         </nav>
 
-        {/* Right Action Buttons - GonitZoggo Success Button */}
-        <div className="hidden sm:flex items-center gap-2.5">
-          <Link
-            href="/admin"
-            title="অ্যাডমিন পোর্টাল"
-            className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+        {/* Right Gamification & AI Actions (Exact Image 4) */}
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          {/* Tiger AI Button */}
+          <button
+            onClick={onOpenHalumAI}
+            className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white text-xs sm:text-sm font-bold shadow-sm hover:shadow active:scale-95 transition-all cursor-pointer"
           >
-            <Shield size={18} />
-          </Link>
+            <Sparkle size={15} weight="fill" className="text-amber-300 animate-spin" />
+            <span>Tiger AI</span>
+          </button>
 
+          {/* Points Pill (Clickable for 1000 pt = 100tk bKash Cashout) */}
+          <button
+            onClick={onOpenCashout}
+            title="১০০০ পয়েন্টে ১০০ টাকা bKash ক্যাশআউট!"
+            className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-2xs"
+          >
+            <Trophy size={16} weight="fill" className="text-amber-500" />
+            <span>{points} pts</span>
+          </button>
+
+          {/* Streak Badge */}
+          <div
+            title="৪ দিনের একটানা অলিম্পিয়াড স্ট্রিক!"
+            className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold"
+          >
+            <Flame size={16} weight="fill" className="text-orange-500" />
+            <span>{streak}</span>
+          </div>
+
+          {/* Speed Badge */}
+          <div
+            title="দ্রুত সমাধান বুস্টার"
+            className="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 text-amber-500 border border-slate-200"
+          >
+            <Lightning size={16} weight="fill" />
+          </div>
+
+          {/* User Profile / Prebook Link */}
           <Link
             href="/#prebook"
-            className="px-4 py-2 rounded-md bg-[#28a745] hover:bg-[#218838] active:bg-[#1e7e34] text-white font-bold text-sm shadow-sm transition-all flex items-center gap-2 border border-emerald-400/30"
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-tr from-purple-700 to-indigo-600 text-white font-bold text-xs shadow-xs hover:ring-2 hover:ring-purple-400 transition-all"
+            title="প্রি-বুকিং ও প্রোফাইল"
           >
-            <span>প্রি-বুক করো</span>
-            <span className="bg-white/20 text-white text-xs px-2 py-0.5 rounded font-black">
-              ১৯৯৳
-            </span>
+            <span>১৯৯৳</span>
           </Link>
-        </div>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          className="lg:hidden text-white p-2 rounded-md hover:bg-white/10 transition-colors"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <X size={24} weight="bold" /> : <List size={24} weight="bold" />}
-        </button>
+          {/* Mobile Menu Hamburger */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="xl:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} weight="bold" /> : <List size={24} weight="bold" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="fixed inset-0 top-16 bg-[#F6F6F4] text-[#2d2d2d] z-50 flex flex-col justify-between p-6 overflow-y-auto lg:hidden">
-          <div className="space-y-4">
-            <div className="text-xs font-bold uppercase tracking-wider text-slate-500 px-2">
-              ন্যাভিগেশন মেনু
-            </div>
-            <div className="space-y-1.5">
-              <Link
-                href="/"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between p-3 rounded-lg bg-white border border-slate-200 text-slate-800 font-semibold hover:border-blue-400 transition-colors"
-              >
-                <span>হোম পেইজ</span>
-                <ArrowRight size={16} className="text-slate-400" />
-              </Link>
-              <Link
-                href="/#course"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between p-3 rounded-lg bg-white border border-slate-200 text-slate-800 font-semibold hover:border-blue-400 transition-colors"
-              >
-                <div className="flex items-center gap-2">
-                  <PuzzlePiece size={18} className="text-[#0072c6]" />
-                  <span>কোর্স ও প্র্যাকটিস মডিউল</span>
-                </div>
-                <ArrowRight size={16} className="text-slate-400" />
-              </Link>
-              <Link
-                href="/mock-tests"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between p-3 rounded-lg bg-white border border-slate-200 text-slate-800 font-semibold hover:border-blue-400 transition-colors"
-              >
-                <div className="flex items-center gap-2">
-                  <Trophy size={18} className="text-amber-500" />
-                  <span>অলিম্পিয়াড মক টেস্ট</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded-full border border-amber-300">
-                    লাইভ
-                  </span>
-                </div>
-                <ArrowRight size={16} className="text-slate-400" />
-              </Link>
-              <Link
-                href="/qa"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between p-3 rounded-lg bg-white border border-slate-200 text-slate-800 font-semibold hover:border-blue-400 transition-colors"
-              >
-                <div className="flex items-center gap-2">
-                  <ChatsCircle size={18} className="text-[#0072c6]" />
-                  <span>কমিউনিটি প্রশ্নোত্তর (Q&A)</span>
-                </div>
-                <ArrowRight size={16} className="text-slate-400" />
-              </Link>
-              <Link
-                href="/status"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between p-3 rounded-lg bg-white border border-slate-200 text-slate-800 font-semibold hover:border-blue-400 transition-colors"
-              >
-                <div className="flex items-center gap-2">
-                  <MagnifyingGlass size={18} className="text-emerald-600" />
-                  <span>বুকিং স্ট্যাটাস চেক</span>
-                </div>
-                <ArrowRight size={16} className="text-slate-400" />
-              </Link>
-            </div>
-
-            <div className="pt-3 border-t border-slate-200">
-              <div className="p-3.5 rounded-lg bg-blue-50 border border-blue-200 text-xs text-blue-900 space-y-1">
-                <div className="font-bold flex items-center gap-1.5">
-                  <Phone size={14} className="text-[#0072c6]" />
-                  <span>bKash হেল্পলাইন: +8801331366865</span>
-                </div>
-                <div className="text-slate-600">রেফারেন্স: PRE_BOOK (কোর্স ফি ১৯৯৳)</div>
-              </div>
-            </div>
+        <div className="xl:hidden border-t border-slate-200 bg-white p-4 space-y-3 shadow-lg">
+          <div className="grid grid-cols-2 gap-2 text-sm font-semibold">
+            <Link
+              href="/"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              🏠 হোম
+            </Link>
+            <Link
+              href="/problems"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              🧮 গণিত ১০০০+
+            </Link>
+            <Link
+              href="/physics"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              ⚛️ পদার্থ ১০০
+            </Link>
+            <Link
+              href="/leaderboard"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              🏆 লিডারবোর্ড
+            </Link>
+            <Link
+              href="/#course"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              🎓 কোর্স ও শিক্ষক
+            </Link>
+            <Link
+              href="/resources"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              📚 BDMO রিসোর্স
+            </Link>
+            <Link
+              href="/mock-tests"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              📝 মক টেস্ট
+            </Link>
+            <Link
+              href="/sudoku"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              🎮 সুডোকু গেম
+            </Link>
+            <Link
+              href="/qa"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              💬 প্রশ্নোত্তর ফোরাম
+            </Link>
+            <Link
+              href="/status"
+              onClick={() => setIsOpen(false)}
+              className="p-2.5 rounded-lg bg-slate-50 text-slate-900 hover:bg-purple-50"
+            >
+              🔍 স্ট্যাটাস চেক
+            </Link>
           </div>
 
-          <div className="pt-4 border-t border-slate-200 space-y-2.5">
-            <Link
-              href="/#prebook"
-              onClick={() => setIsOpen(false)}
-              className="w-full py-3 rounded-lg bg-[#28a745] hover:bg-[#218838] text-white font-bold text-center block shadow-sm text-base"
+          <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+            <a
+              href="https://www.youtube.com/@BanglarMathOlympiad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-red-600 flex items-center gap-1.5"
             >
-              প্রি-বুকিং নিশ্চিত করো (১৯৯৳)
-            </Link>
-            <Link
-              href="/admin"
-              onClick={() => setIsOpen(false)}
-              className="w-full py-2.5 rounded-lg bg-white border border-slate-300 text-slate-600 font-semibold text-center text-xs block hover:bg-slate-50"
+              <YoutubeLogo size={18} weight="fill" />
+              <span>@BanglarMathOlympiad</span>
+            </a>
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                onOpenCashout?.();
+              }}
+              className="text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full"
             >
-              🛡️ অ্যাডমিন পোর্টাল
-            </Link>
+              ক্যাশআউট: ১০০৳ bKash
+            </button>
           </div>
         </div>
       )}
