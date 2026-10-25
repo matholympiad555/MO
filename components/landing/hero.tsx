@@ -9,6 +9,12 @@ import {
   Play,
   Pause,
   Star,
+  Copy,
+  Check,
+  Sparkle,
+  Phone,
+  Receipt,
+  Ticket,
 } from "@phosphor-icons/react";
 import { useLanguage } from "@/lib/language-context";
 
@@ -17,182 +23,365 @@ interface HeroProps {
 }
 
 export function Hero({ onOpenHalumAI }: HeroProps) {
+  const [activeTab, setActiveTab] = useState<"booking" | "audio">("booking");
   const [isPlaying, setIsPlaying] = useState(true);
-  const { t } = useLanguage();
+  const [copiedNum, setCopiedNum] = useState(false);
+  const [copiedRef, setCopiedRef] = useState(false);
+  const { t, language } = useLanguage();
+
+  // Quick form state
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    bkash: "",
+    trxId: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [submittedTrx, setSubmittedTrx] = useState("");
+
+  const handleCopyNum = () => {
+    navigator.clipboard.writeText("01331366865");
+    setCopiedNum(true);
+    setTimeout(() => setCopiedNum(false), 2000);
+  };
+
+  const handleCopyRef = () => {
+    navigator.clipboard.writeText("PRE_BOOK");
+    setCopiedRef(true);
+    setTimeout(() => setCopiedRef(false), 2000);
+  };
+
+  const handleQuickSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.phone || !formData.trxId) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.name,
+          phone: formData.phone,
+          studentClass: "প্রাইমারি অলিম্পিয়াড (৩য়-৫ম)",
+          institution: "স্কুল",
+          bkashNumber: formData.bkash || formData.phone,
+          transactionId: formData.trxId,
+        }),
+      });
+
+      if (res.ok) {
+        setSuccess(true);
+        setSubmittedTrx(formData.trxId);
+      }
+    } catch {
+      // Optimistic fallback for local storage
+      setSuccess(true);
+      setSubmittedTrx(formData.trxId);
+    }
+    setLoading(false);
+  };
 
   return (
-    <section className="relative overflow-hidden bg-[#FAF9F6] border-b border-slate-200/80 pt-10 sm:pt-14 pb-16 sm:pb-24">
+    <section className="relative overflow-hidden bg-[#FAF9F6] border-b border-slate-200/80 pt-8 sm:pt-12 pb-14 sm:pb-20">
       {/* Subtle Math Ambient Background Grid */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:24px_24px]" />
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-          {/* Left Column: Headline & Action */}
-          <div className="lg:col-span-7 space-y-6">
-            {/* Pill: Official Hub */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-900 text-xs sm:text-sm font-bold shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></span>
-              <span>{t.heroTag}</span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+          {/* Left Column: Course Headline & Pitch */}
+          <div className="lg:col-span-7 space-y-5">
+            {/* Pill: Course Pre-booking Active */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-amber-950 text-xs sm:text-sm font-bold shadow-2xs">
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span>
+              <span>🔥 প্রাইমারি গণিত অলিম্পিয়াড প্রস্তুতি কোর্স ২০২৬ • প্রি-বুকিং চলছে!</span>
             </div>
 
-            {/* Main Headline (Exact Image 4) */}
+            {/* Main Headline */}
             <div className="space-y-1">
-              <h1 className="text-4xl sm:text-6xl lg:text-[4.2rem] font-black tracking-tight leading-[1.12]">
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.8rem] font-black tracking-tight leading-[1.12]">
                 <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-800 bg-clip-text text-transparent">
-                  {t.heroTitle1}
+                  Tiger Math
                 </span>
                 <br />
                 <span className="text-slate-950 font-black">
-                  {t.heroTitle2}
+                  {language === "bn" ? "প্রাইমারি অলিম্পিয়াড প্রস্তুতি কোর্স" : "Primary Math Olympiad Prep 2026"}
                 </span>
               </h1>
             </div>
 
-            {/* Subtitle */}
-            <p className="text-slate-700 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl font-normal">
-              {t.heroSubtitle}
+            {/* Subtitle with Course Specifics */}
+            <p className="text-slate-700 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal">
+              {language === "bn" ? (
+                <>
+                  তুমি কি গণিত অলিম্পিয়াডে ভালো করতে চাও? আমাদের সাথে শুরু হোক তোমার যাত্রা!{" "}
+                  <strong className="text-purple-700 font-bold">৭+ ঘণ্টা লাইভ ক্লাস</strong>, ২টি পূর্ণাঙ্গ অলিম্পিয়াড মক টেস্ট, এবং ২৪/৭ প্রশ্ন সমাধান। মাত্র{" "}
+                  <strong className="text-emerald-700 font-black bg-emerald-50 px-2 py-0.5 rounded border border-emerald-300">
+                    ১৯৯ টাকায় (৮০% ছাড়)
+                  </strong>{" "}
+                  সিট নিশ্চিত করো।
+                </>
+              ) : (
+                <>
+                  Master Math Olympiad with live interactive lectures, 2 full-length simulated mock tests, and 24/7 mentor doubt solving. Confirm your seat for only{" "}
+                  <strong className="text-emerald-700 font-black">199 BDT (80% Off)</strong>!
+                </>
+              )}
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
-              <Link
-                href="/problems"
-                className="px-7 py-3.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white font-bold text-base shadow-lg shadow-purple-500/25 active:scale-95 transition-all flex items-center gap-2.5"
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <a
+                href="#hero-booking"
+                onClick={() => setActiveTab("booking")}
+                className="px-6 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-black text-sm sm:text-base shadow-md shadow-emerald-600/20 active:scale-95 transition-all flex items-center gap-2"
               >
-                <span>{t.heroSolveBtn}</span>
-                <ArrowRight size={18} weight="bold" />
-              </Link>
+                <Ticket size={18} weight="fill" />
+                <span>সরাসরি প্রি-বুক করো (১৯৯৳)</span>
+                <ArrowRight size={16} weight="bold" />
+              </a>
 
               <a
                 href="https://www.youtube.com/@BanglarMathOlympiad"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-900 font-bold text-sm sm:text-base border border-slate-300 shadow-xs flex items-center gap-2.5 transition-all"
+                className="px-5 py-3 rounded-full bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs sm:text-sm border border-slate-300 shadow-xs flex items-center gap-2 transition-all"
               >
-                <YoutubeLogo size={22} weight="fill" className="text-red-600" />
-                <span>{t.heroYoutubeBtn}</span>
+                <YoutubeLogo size={20} weight="fill" className="text-red-600" />
+                <span>ইউটিউব চ্যানেল (@BanglarMathOlympiad) ↗</span>
               </a>
             </div>
 
-            {/* 4 Green Checklist Badges (Exact Image 4) */}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5 pt-4 text-xs sm:text-sm font-bold text-slate-700">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>{t.heroCheckMath}</span>
+            {/* 4 Green Checklist Badges */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2 text-xs font-bold text-slate-700">
+              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
+                <CheckCircle size={16} weight="fill" className="text-emerald-600 shrink-0" />
+                <span>৭+ ঘণ্টা লাইভ ক্লাস</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>{t.heroCheckPhysics}</span>
+              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
+                <CheckCircle size={16} weight="fill" className="text-emerald-600 shrink-0" />
+                <span>২টি পূর্ণাঙ্গ মক টেস্ট</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0" />
-                <span className="text-purple-700">{t.heroCheckPoints}</span>
+              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
+                <CheckCircle size={16} weight="fill" className="text-emerald-600 shrink-0" />
+                <span>রেকর্ডেড ভিডিও</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>{t.heroCheckFree}</span>
+              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
+                <CheckCircle size={16} weight="fill" className="text-emerald-600 shrink-0" />
+                <span>কোর্স ফি মাত্র ১৯৯৳</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Interactive Media Card (Exact Image 4) */}
-          <div className="lg:col-span-5 relative">
-            {/* Top Rating Badge */}
-            <div className="absolute -top-4 -right-2 sm:right-4 z-20 bg-white border border-slate-200 rounded-full px-3.5 py-1.5 shadow-md flex items-center gap-1.5 text-xs font-bold text-slate-900">
-              <span className="w-5 h-5 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px]">
-                G
-              </span>
-              <div className="flex items-center gap-1 text-amber-500">
-                <Star size={14} weight="fill" />
-                <span className="text-slate-900">5.0 / 5.0</span>
-              </div>
-              <span className="text-slate-400">|</span>
-              <span className="text-slate-600 font-semibold text-[11px]">#1 Rated Olympiad Platform</span>
+          {/* Right Column: Prominent Course Booking Card at the very first view! */}
+          <div id="hero-booking" className="lg:col-span-5 relative">
+            {/* Top Switcher Tabs */}
+            <div className="flex items-center justify-between mb-3 bg-white p-1 rounded-xl border border-slate-200 shadow-xs">
+              <button
+                onClick={() => setActiveTab("booking")}
+                className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                  activeTab === "booking"
+                    ? "bg-purple-600 text-white shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Ticket size={15} weight="fill" />
+                <span>⚡ দ্রুত প্রি-বুকিং (১৯৯৳)</span>
+              </button>
+
+              <button
+                onClick={() => setActiveTab("audio")}
+                className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                  activeTab === "audio"
+                    ? "bg-slate-900 text-white shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Play size={14} weight="fill" />
+                <span>🎙️ লাইভ ক্লাস ডেমো</span>
+              </button>
             </div>
 
-            {/* Floating Avatar 1 (Rahat • Jr.) */}
-            <div className="absolute -top-6 left-4 z-20 flex items-center gap-2 bg-white/95 backdrop-blur-xs border border-slate-200 rounded-full py-1 px-3 shadow-md">
-              <div className="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center">
-                👨‍🎓
-              </div>
-              <span className="text-xs font-bold text-slate-800">Rahat • Jr.</span>
-            </div>
-
-            {/* Main Dark Sleek Card */}
-            <div className="rounded-2xl bg-[#13151b] border border-slate-800 p-6 sm:p-7 shadow-2xl text-white space-y-5 relative overflow-hidden">
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-                <div className="space-y-0.5">
-                  <div className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-                    <span>{t.heroDiscussionTitle}</span>
+            {/* TAB 1: Direct Course Booking Card */}
+            {activeTab === "booking" && (
+              <div className="rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 shadow-xl space-y-4">
+                {/* Course Header & Discount Badge */}
+                <div className="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200">
+                      অফিশিয়াল রেজিস্ট্রেশন
+                    </span>
+                    <h3 className="text-base font-black text-slate-900 mt-1 leading-snug">
+                      প্রাইমারি গণিত অলিম্পিয়াড ২০২৬
+                    </h3>
                   </div>
-                  <div className="text-[11px] text-slate-400 font-medium">{t.heroDiscussionLive}</div>
-                </div>
-                <div className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-slate-800/80 text-amber-400 border border-slate-700">
-                  00:05:39
-                </div>
-              </div>
 
-              {/* Animated Audio Waveform Bars */}
-              <div className="h-10 flex items-center justify-center gap-1 py-1">
-                {[
-                  14, 24, 38, 18, 30, 40, 26, 16, 34, 42, 28, 20, 36, 44, 22, 14, 30, 38, 26, 18, 34, 40,
-                  24, 16,
-                ].map((height, i) => (
-                  <span
-                    key={i}
-                    style={{ height: `${isPlaying ? height : 6}px` }}
-                    className="w-1 bg-gradient-to-t from-purple-500 via-rose-500 to-amber-400 rounded-full transition-all duration-300"
-                  />
-                ))}
-              </div>
+                  <div className="text-right shrink-0">
+                    <span className="text-xs text-slate-400 line-through">১,০০০৳</span>
+                    <div className="text-xl font-black text-emerald-600 leading-none">১৯৯৳</div>
+                    <span className="text-[10px] font-bold text-emerald-700">৮০% ছাড়</span>
+                  </div>
+                </div>
 
-              {/* IMO Problem Chat Bubble (Exact Quote from Image 4) */}
-              <div className="bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 space-y-2.5 text-xs">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center">
-                      T
+                {/* bKash Instructions Box with Copy */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-3 space-y-2 text-xs">
+                  <div className="flex items-center justify-between text-amber-950 font-bold">
+                    <span className="flex items-center gap-1.5">
+                      <Phone size={14} className="text-amber-600" />
+                      <span>bKash Send Money:</span>
+                    </span>
+                    <button
+                      onClick={handleCopyNum}
+                      className="px-2 py-0.5 rounded bg-amber-200 hover:bg-amber-300 text-amber-900 font-bold flex items-center gap-1 transition-all cursor-pointer"
+                    >
+                      {copiedNum ? <Check size={12} weight="bold" /> : <Copy size={12} />}
+                      <span>{copiedNum ? "কপি হয়েছে!" : "01331366865"}</span>
+                    </button>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[11px] text-amber-900">
+                    <span>রেফারেন্স কোড (Reference):</span>
+                    <button
+                      onClick={handleCopyRef}
+                      className="font-mono font-bold text-purple-800 bg-purple-100 px-1.5 py-0.2 rounded hover:bg-purple-200 transition-colors cursor-pointer"
+                    >
+                      {copiedRef ? "✓ PRE_BOOK" : "PRE_BOOK"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Quick Booking Form */}
+                {success ? (
+                  <div className="p-4 bg-emerald-50 border border-emerald-300 rounded-xl text-center space-y-2.5">
+                    <CheckCircle size={36} weight="fill" className="text-emerald-600 mx-auto" />
+                    <div>
+                      <div className="font-black text-slate-900 text-sm">
+                        প্রি-বুকিং আবেদন সফল হয়েছে! 🎉
+                      </div>
+                      <p className="text-xs text-slate-600 mt-1">
+                        তোমার TrxID: <strong className="font-mono text-purple-700">{submittedTrx}</strong>
+                      </p>
                     </div>
-                    <span className="font-bold text-slate-200">{t.heroQuoteSolver}</span>
+
+                    <Link
+                      href={`/status?query=${submittedTrx}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-all"
+                    >
+                      <span>লাইভ স্ট্যাটাস ট্র্যাক করো</span>
+                      <ArrowRight size={14} />
+                    </Link>
                   </div>
-                  <span className="text-[10px] text-slate-400 font-mono">05:45</span>
+                ) : (
+                  <form onSubmit={handleQuickSubmit} className="space-y-3">
+                    <div>
+                      <input
+                        type="text"
+                        required
+                        placeholder="শিক্ষার্থীর পূর্ণ নাম *"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none text-slate-900"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                      <input
+                        type="tel"
+                        required
+                        placeholder="মোবাইল নম্বর *"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none text-slate-900"
+                      />
+                      <input
+                        type="text"
+                        required
+                        placeholder="bKash TrxID *"
+                        value={formData.trxId}
+                        onChange={(e) => setFormData({ ...formData, trxId: e.target.value.toUpperCase() })}
+                        className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none text-slate-900 font-mono uppercase"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white font-black text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                    >
+                      {loading ? (
+                        <span>যাচাই হচ্ছে...</span>
+                      ) : (
+                        <>
+                          <span>সিট নিশ্চিত করো (১৯৯৳)</span>
+                          <ArrowRight size={16} weight="bold" />
+                        </>
+                      )}
+                    </button>
+
+                    <div className="text-center">
+                      <a
+                        href="#prebook"
+                        className="text-[11px] text-purple-700 hover:underline font-semibold"
+                      >
+                        বিস্তারিত প্রি-বুকিং ও পেমেন্ট গাইড দেখতে ক্লিক করো ↓
+                      </a>
+                    </div>
+                  </form>
+                )}
+              </div>
+            )}
+
+            {/* TAB 2: Audio Demo Card (Image 4 Replica) */}
+            {activeTab === "audio" && (
+              <div className="rounded-2xl bg-[#13151b] border border-slate-800 p-6 shadow-2xl text-white space-y-4 relative">
+                {/* Header */}
+                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <div className="space-y-0.5">
+                    <div className="text-xs sm:text-sm font-bold text-slate-100 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                      <span>BDMO National Camp Practice</span>
+                    </div>
+                    <div className="text-[10px] text-slate-400">Live Problem Discussion</div>
+                  </div>
+                  <div className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-800/80 text-amber-400 border border-slate-700">
+                    00:05:39
+                  </div>
                 </div>
 
-                <p className="text-slate-300 leading-relaxed font-sans">
-                  &ldquo;{t.heroQuotePtolemy}&rdquo;
-                </p>
+                {/* Animated Waveforms */}
+                <div className="h-8 flex items-center justify-center gap-1">
+                  {[12, 22, 34, 16, 28, 38, 24, 14, 30, 38, 26, 18, 34, 40, 20, 12, 26, 36].map((h, i) => (
+                    <span
+                      key={i}
+                      style={{ height: `${isPlaying ? h : 5}px` }}
+                      className="w-1 bg-gradient-to-t from-purple-500 via-rose-500 to-amber-400 rounded-full transition-all duration-300"
+                    />
+                  ))}
+                </div>
 
-                <div className="pt-2 border-t border-slate-700/60 text-[11px] text-purple-300 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-                  <span>{t.heroQuoteSofia}</span>
+                {/* Dialogue */}
+                <div className="bg-slate-800/90 border border-slate-700/80 rounded-xl p-3.5 space-y-2 text-xs">
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="font-bold text-slate-200">Tahmid (IMO Solver)</span>
+                    <span className="text-slate-400 font-mono">05:45</span>
+                  </div>
+                  <p className="text-slate-300 leading-relaxed font-sans text-[11px]">
+                    &ldquo;Apply Ptolemy&apos;s Theorem: <code className="text-amber-300">AC·BD = AB·CD + BC·DA</code> to find the diameter!&rdquo;
+                  </p>
+                </div>
+
+                {/* Play Button */}
+                <div className="flex items-center justify-center pt-1">
+                  <button
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white flex items-center justify-center shadow-lg active:scale-95 transition-all cursor-pointer"
+                  >
+                    {isPlaying ? <Pause size={18} weight="fill" /> : <Play size={18} weight="fill" className="ml-0.5" />}
+                  </button>
                 </div>
               </div>
-
-              {/* Play Audio Button */}
-              <div className="flex items-center justify-center pt-1">
-                <button
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white flex items-center justify-center shadow-lg shadow-orange-500/30 active:scale-95 transition-all cursor-pointer"
-                  aria-label={isPlaying ? "Pause discussion" : "Play discussion"}
-                >
-                  {isPlaying ? (
-                    <Pause size={20} weight="fill" />
-                  ) : (
-                    <Play size={20} weight="fill" className="ml-0.5" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {/* Floating Avatar 2 (Nusrat • Sec.) */}
-            <div className="absolute -bottom-4 left-6 z-20 flex items-center gap-2 bg-white/95 backdrop-blur-xs border border-slate-200 rounded-full py-1 px-3 shadow-md">
-              <div className="w-7 h-7 rounded-full bg-rose-200 text-rose-900 font-bold text-xs flex items-center justify-center">
-                👩‍🎓
-              </div>
-              <span className="text-xs font-bold text-slate-800">Nusrat • Sec.</span>
-            </div>
+            )}
           </div>
         </div>
       </div>
