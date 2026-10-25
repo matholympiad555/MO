@@ -23,7 +23,7 @@ const num = Space_Grotesk({
 export const metadata: Metadata = {
   title: "প্রাইমারি গণিত অলিম্পিয়াড প্রস্তুতি কোর্স ২০২৬ | Banglar Math Olympiad",
   description:
-    "৯৯৯ টাকায় প্রি-বুক করো Banglar Math Olympiad ২০২৬ প্রস্তুতি কোর্স। ৭+ মাসের ক্লাস, রেকর্ডেড লেকচার, ২০+ মক টেস্ট আর ২৪/৭ প্রশ্ন সমাধান।",
+    "১৯৯ টাকায় প্রি-বুক করো Banglar Math Olympiad ২০২৬ প্রস্তুতি কোর্স। ৭+ ঘণ্টার ক্লাস, রেকর্ডেড লেকচার, পূর্ণাঙ্গ মক টেস্ট আর ২৪/৭ প্রশ্ন সমাধান।",
   keywords: [
     "গণিত অলিম্পিয়াড",
     "Banglar Math Olympiad",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "প্রাইমারি গণিত অলিম্পিয়াড প্রস্তুতি কোর্স ২০২৬",
-    description: "৯৯৯ টাকায় সিট কনফার্ম করো। প্রি-বুকিং চলছে।",
+    description: "১৯৯ টাকায় সিট কনফার্ম করো। প্রি-বুকিং চলছে।",
     type: "website",
     locale: "bn_BD",
   },

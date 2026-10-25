@@ -2,11 +2,20 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { List, X, Shield } from "@phosphor-icons/react";
-import { navLinks } from "@/lib/content";
+import { List, X, Shield, Exam, ChatsCircle, CheckCircle, ArrowRight, Phone } from "@phosphor-icons/react";
+import { navLinks, site } from "@/lib/content";
 
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -17,90 +26,181 @@ export function Nav() {
   }, [isOpen]);
 
   return (
-    <nav className="fixed top-6 left-0 right-0 z-40 px-4 container-x">
-      <div className="flex items-center justify-between px-6 py-3 mx-auto bg-ink/90 backdrop-blur-md border border-white/10 rounded-full max-w-7xl shadow-2xl">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-brand text-ink font-display font-black flex items-center justify-center rounded-xl text-xl shadow-[0_0_20px_rgba(255,210,63,0.3)] group-hover:scale-105 transition-transform">
-            B
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-sm"
+          : "bg-white/80 backdrop-blur-md border-b border-slate-200/60"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        {/* Brand Logo */}
+        <Link href="/" className="flex items-center gap-3.5 group">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white font-display font-black flex items-center justify-center text-2xl shadow-md shadow-blue-700/20 ring-1 ring-blue-700/30 group-hover:scale-105 transition-transform">
+            <span className="text-amber-400 drop-shadow-sm">B</span>
           </div>
-          <div className="hidden sm:block font-display text-paper leading-tight">
-            <div className="text-[10px] tracking-wider text-muted">BANGLAR</div>
-            <div className="text-sm font-bold tracking-tight">MATH OLYMPIAD</div>
+          <div className="leading-tight">
+            <div className="font-display font-black text-slate-900 tracking-tight text-base sm:text-lg flex items-center gap-1.5">
+              <span>BANGLAR MATH OLYMPIAD</span>
+            </div>
+            <div className="text-[11px] font-semibold text-blue-700 tracking-wide">
+              {site.tagline} • প্রাইমারি প্রস্তুতি ২০২৬
+            </div>
           </div>
         </Link>
 
-        <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-paper/85 hover:text-brand font-body text-sm font-medium transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+        {/* Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-1.5">
           <Link
-            href="/#prebook"
-            className="px-5 py-2 bg-brand text-ink rounded-full font-body font-bold text-sm hover:bg-brand-deep transition-transform active:scale-[0.98] shadow-md shadow-brand/20"
+            href="/"
+            className="text-slate-700 hover:text-blue-700 hover:bg-slate-100/80 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all"
           >
-            প্রি-বুক করো (১৯৯৳)
+            হোম
           </Link>
           <Link
-            href="/admin"
-            title="Admin Portal"
-            className="p-2 text-paper/40 hover:text-brand transition-colors rounded-full hover:bg-white/5"
+            href="/#course"
+            className="text-slate-700 hover:text-blue-700 hover:bg-slate-100/80 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all"
           >
-            <Shield size={18} />
+            কোর্স
+          </Link>
+          <Link
+            href="/mock-tests"
+            className="text-slate-700 hover:text-blue-700 hover:bg-slate-100/80 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-1.5"
+          >
+            <span>মক টেস্ট</span>
+            <span className="px-1.5 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded-full border border-amber-200">
+              লাইভ
+            </span>
+          </Link>
+          <Link
+            href="/qa"
+            className="text-slate-700 hover:text-blue-700 hover:bg-slate-100/80 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-1.5"
+          >
+            <span>প্রশ্নোত্তর (Q&A)</span>
+          </Link>
+          <Link
+            href="/status"
+            className="text-slate-700 hover:text-blue-700 hover:bg-slate-100/80 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all"
+          >
+            স্ট্যাটাস চেক
+          </Link>
+        </nav>
+
+        {/* Right Actions */}
+        <div className="hidden sm:flex items-center gap-3">
+          <Link
+            href="/admin"
+            title="অ্যাডমিন পোর্টাল"
+            className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+          >
+            <Shield size={19} />
+          </Link>
+
+          <Link
+            href="/#prebook"
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-800 hover:to-indigo-900 text-white font-display font-bold text-sm shadow-md shadow-blue-700/20 hover:shadow-lg active:scale-95 transition-all flex items-center gap-2"
+          >
+            <span>প্রি-বুকিং করো</span>
+            <span className="bg-amber-400 text-slate-900 text-xs px-2 py-0.5 rounded-md font-black">
+              ১৯৯৳
+            </span>
           </Link>
         </div>
 
+        {/* Mobile Hamburger Button */}
         <button
-          className="md:hidden text-paper p-1 rounded-lg hover:bg-white/10"
+          className="lg:hidden text-slate-700 p-2 rounded-xl hover:bg-slate-100 border border-slate-200 transition-colors"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
         >
-          {isOpen ? <X size={26} /> : <List size={26} />}
+          {isOpen ? <X size={24} weight="bold" /> : <List size={24} weight="bold" />}
         </button>
       </div>
 
+      {/* Mobile Drawer */}
       {isOpen && (
-        <div className="fixed inset-0 bg-ink/98 backdrop-blur-2xl z-50 flex flex-col items-center justify-center gap-6 md:hidden px-6">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="absolute top-8 right-8 text-paper p-2 rounded-full bg-white/10"
-            aria-label="Close Menu"
-          >
-            <X size={24} />
-          </button>
-          <div className="w-12 h-12 bg-brand text-ink font-display font-black flex items-center justify-center rounded-2xl text-2xl mb-4">
-            B
+        <div className="fixed inset-0 top-20 bg-white z-50 flex flex-col justify-between p-6 overflow-y-auto lg:hidden border-t border-slate-200">
+          <div className="space-y-4">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 px-3">
+              প্রধান মেনু
+            </div>
+            <div className="space-y-1">
+              <Link
+                href="/"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl text-slate-800 font-bold hover:bg-slate-50 transition-colors"
+              >
+                <span>হোম</span>
+                <ArrowRight size={16} className="text-slate-400" />
+              </Link>
+              <Link
+                href="/#course"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl text-slate-800 font-bold hover:bg-slate-50 transition-colors"
+              >
+                <span>কোর্স পরিচিতি ও মডিউল</span>
+                <ArrowRight size={16} className="text-slate-400" />
+              </Link>
+              <Link
+                href="/mock-tests"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl text-slate-800 font-bold hover:bg-slate-50 transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <span>অনলাইন মক টেস্ট</span>
+                  <span className="px-2 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded-full border border-amber-200">
+                    লাইভ
+                  </span>
+                </div>
+                <ArrowRight size={16} className="text-slate-400" />
+              </Link>
+              <Link
+                href="/qa"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl text-slate-800 font-bold hover:bg-slate-50 transition-colors"
+              >
+                <span>প্রশ্নোত্তর ফোরাম (Q&A)</span>
+                <ArrowRight size={16} className="text-slate-400" />
+              </Link>
+              <Link
+                href="/status"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl text-slate-800 font-bold hover:bg-slate-50 transition-colors"
+              >
+                <span>বুকিং স্ট্যাটাস চেক</span>
+                <ArrowRight size={16} className="text-slate-400" />
+              </Link>
+            </div>
+
+            <div className="pt-4 border-t border-slate-100 space-y-3">
+              <div className="p-4 rounded-2xl bg-blue-50 border border-blue-100 text-xs text-blue-900 space-y-1">
+                <div className="font-bold flex items-center gap-1.5">
+                  <Phone size={14} className="text-blue-700" />
+                  <span>bKash হেল্পলাইন: +8801331366865</span>
+                </div>
+                <div className="text-blue-700">Reference: PRE_BOOK (কোর্স ফি ১৯৯৳)</div>
+              </div>
+            </div>
           </div>
-          {navLinks.map((link) => (
+
+          <div className="pt-6 border-t border-slate-200 space-y-3">
             <Link
-              key={link.href}
-              href={link.href}
-              className="text-xl text-paper font-display hover:text-brand py-1"
+              href="/#prebook"
               onClick={() => setIsOpen(false)}
+              className="w-full py-3.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-center block shadow-md text-base"
             >
-              {link.label}
+              প্রি-বুকিং নিশ্চিত করো (১৯৯৳)
             </Link>
-          ))}
-          <Link
-            href="/#prebook"
-            onClick={() => setIsOpen(false)}
-            className="mt-4 px-8 py-3 bg-brand text-ink rounded-full font-display font-bold text-lg"
-          >
-            প্রি-বুক করো (১৯৯৳)
-          </Link>
-          <Link
-            href="/admin"
-            onClick={() => setIsOpen(false)}
-            className="text-xs text-muted/60 mt-4 flex items-center gap-1.5"
-          >
-            <Shield size={14} /> অ্যাডমিন ড্যাশবোর্ড
-          </Link>
+            <Link
+              href="/admin"
+              onClick={() => setIsOpen(false)}
+              className="w-full py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-center text-xs block hover:bg-slate-50"
+            >
+              🛡️ অ্যাডমিন পোর্টাল
+            </Link>
+          </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

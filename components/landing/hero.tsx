@@ -3,101 +3,134 @@
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { site } from "@/lib/content";
-import { ArrowRight, Exam, ChatsCircle } from "@phosphor-icons/react";
+import { ArrowRight, Exam, ChatsCircle, CheckCircle, ShieldCheck } from "@phosphor-icons/react";
 
 export function Hero() {
   return (
-    <section className="container-x min-h-[100dvh] flex items-center pt-32 pb-20 relative overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
-        <div className="lg:col-span-7">
+    <section className="container-x min-h-[calc(100vh-5rem)] flex items-center pt-12 pb-20 relative overflow-hidden">
+      {/* Background soft ambient radial */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-blue-100/60 via-amber-100/40 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
+        <div className="lg:col-span-7 space-y-6">
           <Reveal>
-            <div className="flex items-center gap-2 mb-6">
-              <span className="w-2.5 h-2.5 rounded-full bg-brand animate-pulse" />
-              <span className="text-brand text-xs sm:text-sm font-semibold tracking-wider uppercase">
-                {site.tagline} • প্রি-বুকিং চলছে!
-              </span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+              <span>{site.tagline} • প্রি-বুকিং চলছে!</span>
             </div>
           </Reveal>
           
           <Reveal delay={100}>
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-black text-paper leading-[1.12] mb-6 tracking-tight">
+            <h1 className="text-4xl sm:text-6xl font-display font-black text-slate-900 leading-[1.15] tracking-tight">
               প্রাইমারি গণিত অলিম্পিয়াড <br />
-              <span className="relative inline-block text-brand mt-1">
+              <span className="text-blue-700 relative inline-block mt-1">
                 প্রস্তুতি কোর্স ২০২৬
               </span>
             </h1>
           </Reveal>
 
-          <Reveal delay={200}>
-            <p className="text-base sm:text-xl text-paper/90 mb-4 max-w-xl font-body leading-relaxed font-semibold">
-              গণিতকে ভয় নয়, যুক্তি দিয়ে গণিতকে জয় করো!
+          <Reveal delay={150}>
+            <p className="text-lg sm:text-xl text-slate-800 font-bold font-display leading-snug">
+              গণিতকে ভয় নয়, যুক্তি দিয়ে গণিতকে জয় করো!
             </p>
-            <p className="text-sm sm:text-base text-muted mb-8 max-w-xl font-body leading-relaxed">
-              ৭+ ঘণ্টার ক্লাস, রেকর্ডেড লেকচার, পূর্ণাঙ্গ মক টেস্ট এবং ২৪/৭ প্রশ্ন সমাধান সুবিধা নিয়ে সাজানো পূর্ণাঙ্গ অলিম্পিয়াড প্রস্তুতি।
+            <p className="text-sm sm:text-base text-slate-600 max-w-xl leading-relaxed mt-2">
+              ৭+ ঘণ্টার ক্লাস, রেকর্ডেড লেকচার, পূর্ণাঙ্গ মক টেস্ট এবং ২৪/৭ প্রশ্ন সমাধানের সুবিধা নিয়ে তৈরি বিশেষায়িত অলিম্পিয়াড কোর্স।
             </p>
           </Reveal>
 
-          <Reveal delay={300}>
-            <div className="flex flex-wrap items-center gap-4">
+          {/* Quick bullets */}
+          <Reveal delay={200}>
+            <div className="grid grid-cols-2 gap-3 pt-1 max-w-lg text-xs font-medium text-slate-700">
+              <div className="flex items-center gap-2">
+                <CheckCircle size={16} className="text-blue-600 shrink-0" weight="fill" />
+                <span>৭+ ঘণ্টার গভীর আলোচনা ও ক্লাস</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle size={16} className="text-blue-600 shrink-0" weight="fill" />
+                <span>২টি পূর্ণাঙ্গ অলিম্পিয়াড মক টেস্ট</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle size={16} className="text-blue-600 shrink-0" weight="fill" />
+                <span>২৪/৭ মেন্টর প্রশ্ন সমাধান সুবিধা</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle size={16} className="text-blue-600 shrink-0" weight="fill" />
+                <span>যুক্তিনির্ভর চিন্তন দক্ষতা বৃদ্ধি</span>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={250}>
+            <div className="flex flex-wrap items-center gap-3.5 pt-2">
               <a
                 href="#prebook"
-                className="px-8 py-3.5 bg-brand text-ink rounded-full font-display font-bold text-base hover:bg-brand-deep transition-transform active:scale-[0.98] shadow-xl shadow-brand/20"
+                className="px-7 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-display font-bold text-sm sm:text-base shadow-md shadow-blue-700/20 active:scale-95 transition-all flex items-center gap-2"
               >
-                প্রি-বুক করো (১৯৯৳)
+                <span>প্রি-বুকিং করো</span>
+                <span className="bg-amber-400 text-slate-900 text-xs px-2 py-0.5 rounded-md font-black">
+                  ১৯৯৳
+                </span>
               </a>
               <Link
                 href="/mock-tests"
-                className="px-6 py-3.5 bg-white/10 text-paper rounded-full font-body font-semibold text-sm hover:bg-white/15 transition-transform active:scale-[0.98] flex items-center gap-2 border border-white/10"
+                className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-800 rounded-xl font-body font-semibold text-sm border border-slate-200/90 shadow-xs hover:border-slate-300 transition-all flex items-center gap-2"
               >
-                <Exam size={18} className="text-brand" />
-                মক টেস্ট দিন
+                <Exam size={18} className="text-blue-600" weight="bold" />
+                <span>মক টেস্ট দিন</span>
               </Link>
               <Link
                 href="/qa"
-                className="px-6 py-3.5 bg-white/5 text-paper/80 rounded-full font-body font-semibold text-sm hover:bg-white/10 transition-transform active:scale-[0.98] flex items-center gap-2 border border-white/5"
+                className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-800 rounded-xl font-body font-semibold text-sm border border-slate-200/90 shadow-xs hover:border-slate-300 transition-all flex items-center gap-2"
               >
-                <ChatsCircle size={18} className="text-sky" />
-                প্রশ্নোত্তর (Q&A)
+                <ChatsCircle size={18} className="text-amber-600" weight="bold" />
+                <span>প্রশ্নোত্তর (Q&A)</span>
               </Link>
             </div>
           </Reveal>
         </div>
 
+        {/* Pricing & Course Box (Right Side) */}
         <div className="lg:col-span-5">
-          <div className="card-shell p-1.5 relative shadow-2xl">
-            <div className="card-core p-8 bg-ink-2 rounded-[calc(1.75rem-4px)] space-y-6">
-              <div className="flex items-center justify-between">
-                <span className="text-xs uppercase tracking-wider text-muted font-mono font-bold">কোর্স ফি মাত্র</span>
-                <span className="px-3 py-1 rounded-full bg-hot/20 text-hot border border-hot/30 text-xs font-bold animate-pulse">
-                  প্রি-বুক অফার!
+          <div className="card-shell p-7 sm:p-8 bg-white border border-slate-200/90 rounded-3xl shadow-xl shadow-slate-200/60 relative space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-xs uppercase tracking-wider text-slate-500 font-mono font-bold block">
+                  কোর্স ফি মাত্র
                 </span>
-              </div>
-
-              <div className="text-5xl sm:text-6xl font-num text-brand font-black tracking-tight">
-                ১৯৯৳
-              </div>
-
-              <div className="space-y-3 pt-2 border-t border-white/10 text-xs text-muted">
-                <div className="flex items-center justify-between">
-                  <span>bKash Personal:</span>
-                  <span className="font-mono text-paper font-bold text-sm">+880 1331 366865</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>Payment Ref:</span>
-                  <span className="font-mono text-brand font-bold bg-brand/10 px-2 py-0.5 rounded border border-brand/20">PRE_BOOK</span>
+                <div className="text-4xl sm:text-5xl font-num text-blue-700 font-black tracking-tight mt-1">
+                  ১৯৯৳
                 </div>
               </div>
-
-              <a
-                href="#prebook"
-                className="block text-center w-full py-3.5 rounded-full bg-brand text-ink font-display font-bold text-sm hover:bg-brand-deep transition-all shadow-lg shadow-brand/20"
-              >
-                এখনই আসন নিশ্চিত করো →
-              </a>
+              <span className="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold animate-pulse">
+                সীমিত আসন অফার!
+              </span>
             </div>
 
-            <div className="absolute -top-3 -right-3 w-12 h-12 bg-sky rounded-2xl flex items-center justify-center text-ink font-num font-bold text-lg shadow-xl shadow-sky/30">π</div>
-            <div className="absolute -bottom-3 -left-3 w-14 h-14 bg-hot rounded-2xl flex items-center justify-center text-paper font-num font-bold text-xl shadow-xl shadow-hot/30">∑</div>
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 text-xs text-slate-700 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500">বিকাশ Personal:</span>
+                <span className="font-mono text-slate-900 font-bold text-sm">+880 1331 366865</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500">Payment Reference:</span>
+                <span className="font-mono text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                  PRE_BOOK
+                </span>
+              </div>
+            </div>
+
+            <a
+              href="#prebook"
+              className="block text-center w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-display font-black text-sm shadow-md shadow-amber-500/20 active:scale-95 transition-all"
+            >
+              এখনই আসন নিশ্চিত করো →
+            </a>
+
+            <div className="pt-2 text-center">
+              <Link href="/status" className="text-xs text-blue-700 hover:underline font-semibold">
+                আগের পেমেন্ট ভেরিফিকেশন স্ট্যাটাস চেক করুন →
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-ink: #04122b;
-  --color-ink-2: #071b3a;
-  --color-ink-3: #0b2549;
-  --color-paper: #f6f0e1;
-  --color-muted: #a7b6cd;
-  --color-brand: #ffd23f;
-  --color-brand-deep: #e8b400;
-  --color-hot: #ed2a66;
-  --color-sky: #57b6ee;
+  --color-ink: #f8fafc;
+  --color-ink-2: #ffffff;
+  --color-ink-3: #f1f5f9;
+  --color-paper: #0f172a;
+  --color-muted: #475569;
+  --color-brand: #d97706;
+  --color-brand-deep: #b45309;
+  --color-navy: #0f4bb4;
+  --color-navy-dark: #0a337f;
+  --color-hot: #e11d48;
+  --color-sky: #0284c7;
   --font-display: var(--font-bangla-display);
   --font-body: var(--font-bangla-body);
   --font-num: var(--font-num);
@@ -19,12 +21,12 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-  --radius-card: 1.75rem;
-  color-scheme: dark;
+  --radius-card: 1.25rem;
+  color-scheme: light;
 }
 
 * {
-  border-color: rgb(255 255 255 / 0.08);
+  border-color: #e2e8f0;
 }
 
 html {
@@ -41,19 +43,19 @@ body {
 }
 
 ::selection {
-  background: var(--color-brand);
-  color: #04122b;
+  background: #fde68a;
+  color: #0f172a;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-brand);
-  outline-offset: 3px;
+  outline: 2px solid #0f4bb4;
+  outline-offset: 2px;
   border-radius: 4px;
 }
 
 @utility container-x {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1240px;
   margin-inline: auto;
   padding-inline: 1.25rem;
   @media (min-width: 768px) {
@@ -68,28 +70,29 @@ body {
 
 @utility card-shell {
   border-radius: var(--radius-card);
-  border: 1px solid rgb(255 255 255 / 0.08);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 24px 60px -30px rgb(0 0 0 / 0.8);
+    0 1px 3px 0 rgb(0 0 0 / 0.04),
+    0 10px 25px -5px rgb(15 23 42 / 0.04),
+    0 4px 6px -4px rgb(15 23 42 / 0.02);
 }
 
 @utility card-core {
-  border-radius: calc(var(--radius-card) - 0.375rem);
-  background: rgb(7 27 58 / 0.72);
+  border-radius: calc(var(--radius-card) - 0.25rem);
+  background: #ffffff;
   height: 100%;
 }
 
 /* ---------- reveal on scroll ---------- */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(26px);
-  filter: blur(6px);
+  transform: translateY(20px);
+  filter: blur(4px);
   transition:
-    opacity 0.8s var(--ease-out),
-    transform 0.9s var(--ease-out),
-    filter 0.9s var(--ease-out);
+    opacity 0.7s var(--ease-out),
+    transform 0.8s var(--ease-out),
+    filter 0.8s var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -102,10 +105,10 @@ body {
 /* ---------- ambient background ---------- */
 .ambient-grid {
   background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+    linear-gradient(to right, rgb(15 23 42 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(15 23 42 / 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 80%);
 }
 
 .grain {
@@ -113,7 +116,7 @@ body {
   inset: 0;
   z-index: 40;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.012;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -133,25 +136,19 @@ body {
   animation: marquee-x 38s linear infinite;
 }
 
-/* ---------- hero orbit ---------- */
+/* ---------- float animation ---------- */
 @keyframes float-slow {
   0%,
   100% {
-    transform: translateY(0) rotate(-2deg);
+    transform: translateY(0) rotate(-1deg);
   }
   50% {
-    transform: translateY(-14px) rotate(2deg);
+    transform: translateY(-8px) rotate(1deg);
   }
 }
 
 .float-slow {
-  animation: float-slow 9s var(--ease-in-out) infinite;
-}
-
-@keyframes dash-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+  animation: float-slow 8s var(--ease-in-out) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

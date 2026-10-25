@@ -54,10 +54,10 @@ function StatusContent() {
     <div className="max-w-2xl mx-auto space-y-8">
       {/* Title */}
       <div className="text-center space-y-3">
-        <h1 className="text-3xl sm:text-4xl font-black font-display text-paper">
-          প্রি-বুকিং <span className="text-brand">স্ট্যাটাস চেক</span>
+        <h1 className="text-3xl sm:text-4xl font-black font-display text-slate-900">
+          প্রি-বুকিং <span className="text-blue-700">স্ট্যাটাস চেক</span>
         </h1>
-        <p className="text-muted text-sm leading-relaxed">
+        <p className="text-slate-600 text-sm leading-relaxed">
           তুমি যে মোবাইল নম্বর বা বিকাশ Transaction ID (TrxID) দিয়ে প্রি-বুকিং করেছিলে, তা দিয়ে লাইভ স্ট্যাটাস যাচাই করো।
         </p>
       </div>
@@ -68,34 +68,34 @@ function StatusContent() {
           e.preventDefault();
           handleSearch(query);
         }}
-        className="card-shell p-2 flex items-center gap-2 border border-white/15"
+        className="card-shell p-2.5 flex items-center gap-2 border border-slate-200/90 bg-white shadow-md rounded-2xl"
       >
         <div className="relative flex-1">
-          <MagnifyingGlass size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
+          <MagnifyingGlass size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="01XXXXXXXXX অথবা BKXXXXXXXX"
-            className="w-full bg-transparent pl-12 pr-4 py-3 text-sm text-paper outline-none placeholder:text-muted/60"
+            className="w-full bg-transparent pl-12 pr-4 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 font-mono"
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-3 rounded-full bg-brand text-ink text-sm font-bold hover:bg-brand-deep active:scale-95 transition-all shrink-0 disabled:opacity-50"
+          className="px-6 py-2.5 rounded-xl bg-blue-700 text-white text-sm font-bold hover:bg-blue-800 active:scale-95 transition-all shrink-0 shadow-sm disabled:opacity-50"
         >
-          {loading ? "খোঁজা হচ্ছে..." : "যাচাই করো"}
+          {loading ? "যাচাই হচ্ছে..." : "যাচাই করো"}
         </button>
       </form>
 
       {/* Error Message */}
       {error && (
-        <div className="card-shell p-6 text-center space-y-3 border-red-500/30 bg-red-500/5">
-          <WarningCircle size={36} className="text-red-400 mx-auto" />
-          <p className="text-sm text-red-200">{error}</p>
-          <div className="text-xs text-muted">
+        <div className="card-shell p-6 text-center space-y-3 border-rose-200 bg-rose-50 rounded-2xl">
+          <WarningCircle size={36} className="text-rose-600 mx-auto" weight="fill" />
+          <p className="text-sm text-rose-800 font-medium">{error}</p>
+          <div className="text-xs text-slate-600">
             এখনও প্রি-বুকিং না করে থাকলে{" "}
-            <Link href="/#prebook" className="text-brand underline">
+            <Link href="/#prebook" className="text-blue-700 font-bold underline">
               এখানে প্রি-বুকিং করো
             </Link>
           </div>
@@ -104,26 +104,26 @@ function StatusContent() {
 
       {/* Result Display Card */}
       {result && (
-        <div className="card-shell p-6 sm:p-8 space-y-6 border-brand/30">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="card-shell p-6 sm:p-8 space-y-6 border border-slate-200/90 bg-white shadow-xl rounded-3xl">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <span className="text-xs text-muted">শিক্ষার্থীর নাম</span>
-              <h2 className="text-xl font-bold font-display text-paper">{result.full_name}</h2>
+              <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">শিক্ষার্থীর নাম</span>
+              <h2 className="text-xl font-bold font-display text-slate-900">{result.full_name}</h2>
             </div>
 
             {/* Status Pill */}
             {result.status === "verified" && (
-              <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 text-xs font-bold flex items-center gap-1.5">
+              <span className="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
                 <CheckCircle size={16} weight="fill" /> ভেরিফাইড (নিশ্চিত)
               </span>
             )}
             {result.status === "pending" && (
-              <span className="px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 text-xs font-bold flex items-center gap-1.5">
+              <span className="px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold flex items-center gap-1.5 shadow-xs">
                 <Clock size={16} weight="fill" /> যাচাইকরণ চলছে (পেন্ডিং)
               </span>
             )}
             {result.status === "rejected" && (
-              <span className="px-3.5 py-1.5 rounded-full bg-red-500/15 border border-red-500/40 text-red-400 text-xs font-bold flex items-center gap-1.5">
+              <span className="px-3.5 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
                 <XCircle size={16} weight="fill" /> বাতিল / অমিল
               </span>
             )}
@@ -131,20 +131,20 @@ function StatusContent() {
 
           <div className="grid grid-cols-2 gap-4 text-xs sm:text-sm">
             <div>
-              <span className="text-muted block text-xs">মোবাইল নম্বর</span>
-              <span className="font-mono text-paper font-semibold">{result.phone}</span>
+              <span className="text-slate-500 block text-xs">মোবাইল নম্বর</span>
+              <span className="font-mono text-slate-900 font-semibold">{result.phone}</span>
             </div>
             <div>
-              <span className="text-muted block text-xs">Transaction ID</span>
-              <span className="font-mono text-brand font-bold uppercase">{result.transaction_id}</span>
+              <span className="text-slate-500 block text-xs">Transaction ID</span>
+              <span className="font-mono text-blue-700 font-bold uppercase">{result.transaction_id}</span>
             </div>
             <div>
-              <span className="text-muted block text-xs">শ্রেণি</span>
-              <span className="text-paper">{result.student_class || "প্রাইমারি"}</span>
+              <span className="text-slate-500 block text-xs">শ্রেণি</span>
+              <span className="text-slate-800">{result.student_class || "প্রাইমারি"}</span>
             </div>
             <div>
-              <span className="text-muted block text-xs">আবেদনের তারিখ</span>
-              <span className="text-paper">
+              <span className="text-slate-500 block text-xs">আবেদনের তারিখ</span>
+              <span className="text-slate-800 font-mono">
                 {new Date(result.created_at).toLocaleDateString("bn-BD")}
               </span>
             </div>
@@ -154,15 +154,15 @@ function StatusContent() {
           <div
             className={`p-4 rounded-xl border text-xs sm:text-sm leading-relaxed ${
               result.status === "verified"
-                ? "bg-emerald-500/10 border-emerald-500/25 text-emerald-200"
+                ? "bg-emerald-50 border-emerald-200 text-emerald-900"
                 : result.status === "pending"
-                ? "bg-amber-500/10 border-amber-500/25 text-amber-200"
-                : "bg-red-500/10 border-red-500/25 text-red-200"
+                ? "bg-amber-50 border-amber-200 text-amber-900"
+                : "bg-rose-50 border-rose-200 text-rose-900"
             }`}
           >
             {result.status === "verified" && (
               <div>
-                🎉 <strong>অভিনন্দন!</strong> তোমার বিকাশ পেমেন্ট সফলভাবে যাচাই হয়েছে। তোমার সিট নিশ্চিত করা হয়েছে। ক্লাস শুরুর যাবতীয় লিংক ও ইনভাইটেশন তোমার দেওয়া নম্বরে মেসেজে পাঠিয়ে দেওয়া হবে।
+                🎉 <strong>অভিনন্দন!</strong> তোমার বিকাশ পেমেন্ট সফলভাবে যাচাই হয়েছে। তোমার আসন নিশ্চিত করা হয়েছে। ক্লাস শুরুর যাবতীয় লিংক ও ইনভাইটেশন তোমার দেওয়া নম্বরে মেসেজে পাঠিয়ে দেওয়া হবে।
               </div>
             )}
             {result.status === "pending" && (
@@ -180,9 +180,9 @@ function StatusContent() {
           <div className="pt-2 text-center">
             <Link
               href="/mock-tests"
-              className="inline-flex items-center gap-1.5 text-xs text-brand hover:underline font-semibold"
+              className="inline-flex items-center gap-1.5 text-xs text-blue-700 hover:underline font-bold"
             >
-              এখনই মক টেস্ট দিয়ে প্রস্তুতি শুরু করো <ArrowRight size={14} />
+              এখনই অনলাইন মক টেস্ট দিয়ে প্রস্তুতি শুরু করো <ArrowRight size={14} />
             </Link>
           </div>
         </div>
@@ -195,8 +195,8 @@ export default function BookingStatusPage() {
   return (
     <>
       <Nav />
-      <main className="min-h-screen pt-32 pb-24 container-x max-w-4xl">
-        <Suspense fallback={<div className="text-center py-20 text-muted">লোড হচ্ছে...</div>}>
+      <main className="min-h-screen pt-12 pb-24 container-x max-w-4xl">
+        <Suspense fallback={<div className="text-center py-20 text-slate-500">লোড হচ্ছে...</div>}>
           <StatusContent />
         </Suspense>
       </main>

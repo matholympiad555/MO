@@ -56,21 +56,23 @@ export function BookingForm() {
 
   if (success) {
     return (
-      <div className="card-shell p-8 flex flex-col items-center text-center space-y-6">
-        <div className="size-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+      <div className="card-shell p-8 sm:p-10 flex flex-col items-center text-center space-y-6 bg-white border border-slate-200/90 shadow-xl rounded-3xl">
+        <div className="size-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shadow-sm">
           <CheckCircle size={40} weight="fill" />
         </div>
         <div className="space-y-2">
-          <h3 className="text-2xl font-bold text-paper font-display">তোমার প্রি-বুকিং সফলভাবে জমা হয়েছে!</h3>
-          <p className="text-sm text-muted max-w-md">
-            ধন্যবাদ! তোমার ট্রানজেকশন আইডি <strong className="text-brand font-mono">{submittedTrx}</strong> সংরক্ষিত হয়েছে। অ্যাডমিন পেমেন্ট যাচাই করে ২৪ ঘণ্টার মধ্যে কনফার্ম করবে।
+          <h3 className="text-2xl font-black text-slate-900 font-display">
+            তোমার প্রি-বুকিং সফলভাবে জমা হয়েছে!
+          </h3>
+          <p className="text-sm text-slate-600 max-w-md leading-relaxed">
+            ধন্যবাদ! তোমার ট্রানজেকশন আইডি <strong className="text-blue-700 font-mono font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">{submittedTrx}</strong> সংরক্ষিত হয়েছে। অ্যাডমিন পেমেন্ট যাচাই করে ২৪ ঘণ্টার মধ্যে সিট নিশ্চিত করবে।
           </p>
         </div>
 
         <div className="flex flex-wrap gap-3 pt-2">
           <Link
             href={`/status?query=${submittedTrx}`}
-            className="px-5 py-2.5 rounded-full bg-brand text-ink text-sm font-semibold hover:bg-brand-deep transition-all"
+            className="px-6 py-3 rounded-xl bg-blue-700 text-white text-sm font-bold hover:bg-blue-800 shadow-md shadow-blue-700/20 transition-all"
           >
             স্ট্যাটাস চেক করুন
           </Link>
@@ -86,7 +88,7 @@ export function BookingForm() {
                 transactionId: "",
               });
             }}
-            className="px-5 py-2.5 rounded-full bg-white/10 text-paper text-sm hover:bg-white/20 transition-all"
+            className="px-6 py-3 rounded-xl bg-slate-100 text-slate-800 text-sm font-semibold hover:bg-slate-200 transition-all"
           >
             আরেকটি বুকিং করুন
           </button>
@@ -96,83 +98,90 @@ export function BookingForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card-shell p-6 sm:p-8 space-y-5">
+    <form onSubmit={handleSubmit} className="card-shell p-6 sm:p-9 space-y-5 bg-white border border-slate-200/90 shadow-xl rounded-3xl">
+      <div>
+        <h3 className="text-xl font-bold font-display text-slate-900">
+          প্রি-বুকিং আবেদন ফরম
+        </h3>
+        <p className="text-xs text-slate-500 mt-1">
+          বিকাশে ১৯৯ টাকা সেন্ড মানি করে নিচের তথ্যগুলো পূরণ করুন।
+        </p>
+      </div>
+
       {error && (
-        <div className="flex items-center gap-2 p-3.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-200 text-sm">
-          <WarningCircle size={20} className="shrink-0 text-red-400" />
+        <div className="flex items-center gap-2 p-3.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-800 text-xs sm:text-sm font-medium">
+          <WarningCircle size={20} className="shrink-0 text-rose-600" weight="fill" />
           <span>{error}</span>
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-paper/80">শিক্ষার্থীর নাম *</label>
+          <label className="text-xs font-bold text-slate-700">শিক্ষার্থীর পূর্ণ নাম *</label>
           <input
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="উদাঃ রাফিদ হাসান"
-            className="w-full bg-white/[0.04] border border-white/15 rounded-xl p-3 text-sm text-paper focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder:text-muted/50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-paper/80">অভিভাবক / শিক্ষার্থীর ফোন নম্বর *</label>
+          <label className="text-xs font-bold text-slate-700">মোবাইল নম্বর *</label>
           <input
             required
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="01XXXXXXXXX"
-            className="w-full bg-white/[0.04] border border-white/15 rounded-xl p-3 text-sm text-paper focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder:text-muted/50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-paper/80">শ্রেণি *</label>
+          <label className="text-xs font-bold text-slate-700">শ্রেণি *</label>
           <select
             value={formData.grade}
             onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
-            className="w-full bg-ink-2 border border-white/15 rounded-xl p-3 text-sm text-paper focus:border-brand outline-none transition-all"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:bg-white focus:border-blue-600 outline-none transition-all"
           >
             <option value="ক্লাস ৩">ক্লাস ৩</option>
             <option value="ক্লাস ৪-৫ (প্রাইমারি)">ক্লাস ৪-৫ (প্রাইমারি)</option>
             <option value="ক্লাস ৬-৮ (জুনিয়র)">ক্লাস ৬-৮ (জুনিয়র)</option>
-            <option value="এসএসসি">এসএসসি</option>
-            <option value="এইচএসসি">এইচএসসি</option>
             <option value="অন্যান্য">অন্যান্য</option>
           </select>
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-paper/80">স্কুল / শিক্ষা প্রতিষ্ঠানের নাম</label>
+          <label className="text-xs font-bold text-slate-700">স্কুল / শিক্ষা প্রতিষ্ঠানের নাম</label>
           <input
             value={formData.institution}
             onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
             placeholder="উদাঃ আইডিয়াল স্কুল"
-            className="w-full bg-white/[0.04] border border-white/15 rounded-xl p-3 text-sm text-paper focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder:text-muted/50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-paper/80">যে bKash নম্বর থেকে টাকা পাঠিয়েছেন *</label>
+          <label className="text-xs font-bold text-slate-700">যে বিকাশ নম্বর থেকে টাকা পাঠিয়েছেন *</label>
           <input
             required
             value={formData.bkash}
             onChange={(e) => setFormData({ ...formData, bkash: e.target.value })}
             placeholder="01XXXXXXXXX"
-            className="w-full bg-white/[0.04] border border-white/15 rounded-xl p-3 text-sm text-paper focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder:text-muted/50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-paper/80">bKash Transaction ID (TrxID) *</label>
+          <label className="text-xs font-bold text-slate-700">bKash Transaction ID (TrxID) *</label>
           <input
             required
             value={formData.transactionId}
             onChange={(e) => setFormData({ ...formData, transactionId: e.target.value.toUpperCase() })}
             placeholder="উদাঃ BK992817AX"
-            className="w-full bg-white/[0.04] border border-white/15 rounded-xl p-3 text-sm text-paper font-mono uppercase focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder:text-muted/50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 font-mono uppercase focus:bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all placeholder:text-slate-400"
           />
         </div>
       </div>
@@ -180,15 +189,15 @@ export function BookingForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 rounded-full bg-brand text-ink font-semibold flex items-center justify-center gap-2 hover:bg-brand-deep hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50"
+        className="w-full py-4 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-display font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-md shadow-blue-700/20 active:scale-98 transition-all disabled:opacity-50"
       >
-        {loading ? "সার্ভারে পাঠানো হচ্ছে..." : "প্রি-বুক নিশ্চিত করো"}
-        {!loading && <ArrowUpRight weight="bold" />}
+        {loading ? "সার্ভারে প্রক্রিয়াধীন..." : "প্রি-বুক নিশ্চিত করো (১৯৯৳)"}
+        {!loading && <ArrowUpRight weight="bold" size={18} />}
       </button>
 
-      <div className="flex items-center justify-between text-xs text-muted pt-1">
-        <span>নিরাপদ ও এনক্রিপ্টেড পেমেন্ট ভেরিফিকেশন</span>
-        <Link href="/status" className="text-brand hover:underline">
+      <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 pt-1 gap-2">
+        <span>🔒 নিরাপদ ও এনক্রিপ্টেড পেমেন্ট ভেরিফিকেশন</span>
+        <Link href="/status" className="text-blue-700 hover:underline font-bold">
           আগের বুকিং স্ট্যাটাস চেক করুন →
         </Link>
       </div>

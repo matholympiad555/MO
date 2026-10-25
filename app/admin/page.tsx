@@ -42,7 +42,6 @@ export default function AdminDashboardPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Default admin passcode: bmo2026admin
     if (authPin === "bmo2026admin" || authPin === "admin123") {
       sessionStorage.setItem("bmo_admin_auth", "true");
       setIsAuthenticated(true);
@@ -104,7 +103,6 @@ export default function AdminDashboardPage() {
         setBookings((prev) =>
           prev.map((b) => (b.id === bookingId ? data.data : b)),
         );
-        // Refresh stats
         const resStats = await fetch("/api/admin/stats");
         const dataStats = await resStats.json();
         if (dataStats.success) setStats(dataStats.data);
@@ -120,17 +118,17 @@ export default function AdminDashboardPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-ink flex items-center justify-center p-4">
-        <div className="card-shell max-w-md w-full p-8 text-center space-y-6">
-          <div className="size-16 rounded-2xl bg-brand/10 border border-brand/20 text-brand flex items-center justify-center mx-auto">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <div className="card-shell max-w-md w-full p-8 text-center space-y-6 bg-white border border-slate-200/90 rounded-3xl shadow-xl">
+          <div className="size-16 rounded-2xl bg-blue-50 border border-blue-100 text-blue-700 flex items-center justify-center mx-auto shadow-inner">
             <LockKey size={32} weight="fill" />
           </div>
 
           <div>
-            <h1 className="text-2xl font-bold font-display text-paper">
+            <h1 className="text-2xl font-bold font-display text-slate-900">
               অ্যাডমিন পোর্টাল লগইন
             </h1>
-            <p className="text-xs text-muted mt-1.5">
+            <p className="text-xs text-slate-500 mt-1.5">
               Banglar Math Olympiad ম্যানেজমেন্ট ড্যাশবোর্ড
             </p>
           </div>
@@ -141,20 +139,20 @@ export default function AdminDashboardPage() {
               value={authPin}
               onChange={(e) => setAuthPin(e.target.value)}
               placeholder="পাসকোড দিন (ডিফল্ট: bmo2026admin)"
-              className="w-full bg-white/[0.04] border border-white/15 rounded-xl p-3.5 text-center text-paper font-mono text-sm focus:border-brand outline-none"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-center text-slate-900 font-mono text-sm focus:bg-white focus:border-blue-600 outline-none"
             />
 
-            {authError && <p className="text-xs text-red-400">{authError}</p>}
+            {authError && <p className="text-xs text-rose-600 font-medium">{authError}</p>}
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-brand text-ink font-bold text-sm hover:bg-brand-deep active:scale-95 transition-all shadow-lg shadow-brand/15"
+              className="w-full py-3.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-sm shadow-md shadow-blue-700/20 active:scale-95 transition-all"
             >
               প্রবেশ করুন
             </button>
           </form>
 
-          <Link href="/" className="inline-block text-xs text-muted hover:text-paper">
+          <Link href="/" className="inline-block text-xs font-semibold text-slate-500 hover:text-blue-700">
             ← মূল ওয়েবসাইটে ফিরুন
           </Link>
         </div>
@@ -173,16 +171,16 @@ export default function AdminDashboardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-ink text-paper">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* Top Navbar */}
-      <header className="sticky top-0 z-30 bg-ink-2/95 backdrop-blur-md border-b border-white/10 px-6 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex items-center justify-between shadow-xs">
         <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-lg bg-brand text-ink font-bold font-display flex items-center justify-center text-sm">
+          <span className="w-9 h-9 rounded-xl bg-blue-700 text-white font-bold font-display flex items-center justify-center text-sm shadow-sm">
             B
           </span>
           <div>
-            <h2 className="text-xs font-medium text-muted">অ্যাডমিন ড্যাশবোর্ড</h2>
-            <p className="text-sm font-bold text-paper">Banglar Math Olympiad 2026</p>
+            <h2 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">অ্যাডমিন ড্যাশবোর্ড</h2>
+            <p className="text-sm font-bold text-slate-900">Banglar Math Olympiad 2026</p>
           </div>
         </div>
 
@@ -190,14 +188,14 @@ export default function AdminDashboardPage() {
           <Link
             href="/"
             target="_blank"
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs text-muted hover:text-brand"
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-blue-700"
           >
             <span>ওয়েবসাইট দেখুন</span>
             <ArrowSquareOut size={14} />
           </Link>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-1.5 text-xs px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-paper hover:bg-white/10"
+            className="flex items-center gap-1.5 text-xs px-3.5 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 font-semibold transition-all"
           >
             <SignOut size={14} />
             <span>লগআউট</span>
@@ -209,50 +207,50 @@ export default function AdminDashboardPage() {
         {/* KPI Summary Cards */}
         {stats && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div className="card-shell p-5 space-y-2">
-              <div className="flex items-center justify-between text-muted text-xs">
+            <div className="card-shell p-5 space-y-2 bg-white border border-slate-200/90 rounded-2xl shadow-sm">
+              <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
                 <span>মোট প্রি-বুকিং</span>
-                <Users size={20} className="text-sky" />
+                <Users size={20} className="text-blue-600" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black font-mono text-paper">
+              <div className="text-2xl sm:text-3xl font-black font-mono text-slate-900">
                 {stats.totalBookings}
               </div>
-              <div className="text-[11px] text-amber-400">
+              <div className="text-[11px] text-amber-700 font-bold">
                 {stats.pendingCount}টি পেন্ডিং ভেরিফিকেশন
               </div>
             </div>
 
-            <div className="card-shell p-5 space-y-2">
-              <div className="flex items-center justify-between text-muted text-xs">
+            <div className="card-shell p-5 space-y-2 bg-white border border-slate-200/90 rounded-2xl shadow-sm">
+              <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
                 <span>ভেরিফাইড সিট</span>
-                <ShieldCheck size={20} className="text-emerald-400" />
+                <ShieldCheck size={20} className="text-emerald-600" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400">
+              <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-600">
                 {stats.verifiedCount}
               </div>
-              <div className="text-[11px] text-muted">কনফার্মড শিক্ষার্থী</div>
+              <div className="text-[11px] text-slate-500">কনফার্মড শিক্ষার্থী</div>
             </div>
 
-            <div className="card-shell p-5 space-y-2">
-              <div className="flex items-center justify-between text-muted text-xs">
+            <div className="card-shell p-5 space-y-2 bg-white border border-slate-200/90 rounded-2xl shadow-sm">
+              <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
                 <span>মোট সংগৃহীত ফি</span>
-                <CurrencyDollar size={20} className="text-brand" />
+                <CurrencyDollar size={20} className="text-blue-700" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black font-mono text-brand">
+              <div className="text-2xl sm:text-3xl font-black font-mono text-blue-700">
                 ৳{stats.totalRevenue.toLocaleString("bn-BD")}
               </div>
-              <div className="text-[11px] text-muted">১৯৯৳ জনপ্রতি রেট</div>
+              <div className="text-[11px] text-slate-500">১৯৯৳ জনপ্রতি রেট</div>
             </div>
 
-            <div className="card-shell p-5 space-y-2">
-              <div className="flex items-center justify-between text-muted text-xs">
+            <div className="card-shell p-5 space-y-2 bg-white border border-slate-200/90 rounded-2xl shadow-sm">
+              <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
                 <span>মক টেস্ট অংশগ্রহণ</span>
-                <Exam size={20} className="text-amber-400" />
+                <Exam size={20} className="text-amber-600" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black font-mono text-paper">
+              <div className="text-2xl sm:text-3xl font-black font-mono text-slate-900">
                 {stats.totalTestAttempts}
               </div>
-              <div className="text-[11px] text-muted">
+              <div className="text-[11px] text-slate-500">
                 {stats.totalQaQuestions}টি Q&A প্রশ্ন
               </div>
             </div>
@@ -260,14 +258,14 @@ export default function AdminDashboardPage() {
         )}
 
         {/* Tab Controls */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab("bookings")}
-              className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+              className={`px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === "bookings"
-                  ? "bg-brand text-ink"
-                  : "bg-white/5 text-muted hover:text-paper"
+                  ? "bg-blue-700 text-white shadow-xs"
+                  : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50"
               }`}
             >
               বুকিং তালিকা ({bookings.length})
@@ -276,7 +274,7 @@ export default function AdminDashboardPage() {
 
           <button
             onClick={loadAdminData}
-            className="text-xs px-3 py-1.5 rounded-full bg-white/5 text-muted hover:text-paper"
+            className="text-xs px-3.5 py-1.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-semibold shadow-xs"
           >
             {loading ? "রিফ্রেশ হচ্ছে..." : "রিলোড 🔄"}
           </button>
@@ -296,10 +294,10 @@ export default function AdminDashboardPage() {
                 <button
                   key={f.value}
                   onClick={() => setFilter(f.value)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all border ${
                     filter === f.value
-                      ? "bg-white/15 text-paper border-white/20"
-                      : "bg-transparent text-muted border-white/5 hover:border-white/10"
+                      ? "bg-slate-900 text-white border-slate-900 shadow-xs"
+                      : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
                   }`}
                 >
                   {f.label}
@@ -307,21 +305,21 @@ export default function AdminDashboardPage() {
               ))}
             </div>
 
-            <div className="relative min-w-[260px]">
-              <MagnifyingGlass size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+            <div className="relative min-w-[280px]">
+              <MagnifyingGlass size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="নাম, ফোন বা TrxID দিয়ে খুঁজুন..."
-                className="w-full bg-ink-2 border border-white/10 rounded-xl py-2 pl-9 pr-3 text-xs text-paper focus:border-brand outline-none"
+                className="w-full bg-white border border-slate-200 rounded-xl py-2 pl-9 pr-3 text-xs text-slate-900 focus:border-blue-600 outline-none shadow-xs"
               />
             </div>
           </div>
 
           {/* Table */}
-          <div className="card-shell overflow-x-auto">
+          <div className="card-shell overflow-x-auto bg-white border border-slate-200/90 rounded-2xl shadow-sm">
             <table className="w-full text-left text-xs">
-              <thead className="bg-white/[0.03] border-b border-white/10 text-muted uppercase tracking-wider font-mono">
+              <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider font-mono">
                 <tr>
                   <th className="p-4">তারিখ</th>
                   <th className="p-4">শিক্ষার্থীর নাম</th>
@@ -333,48 +331,48 @@ export default function AdminDashboardPage() {
                   <th className="p-4 text-right">পদক্ষেপ</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-slate-100">
                 {filteredBookings.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="p-8 text-center text-muted">
+                    <td colSpan={8} className="p-8 text-center text-slate-500">
                       কোনো বুকিং রেকর্ড পাওয়া যায়নি।
                     </td>
                   </tr>
                 ) : (
                   filteredBookings.map((b) => (
-                    <tr key={b.id} className="hover:bg-white/[0.02] transition-colors">
-                      <td className="p-4 text-muted whitespace-nowrap font-mono">
+                    <tr key={b.id} className="hover:bg-slate-50/70 transition-colors">
+                      <td className="p-4 text-slate-500 whitespace-nowrap font-mono">
                         {new Date(b.created_at).toLocaleDateString("bn-BD")}
                       </td>
-                      <td className="p-4 font-semibold text-paper whitespace-nowrap">
+                      <td className="p-4 font-bold text-slate-900 whitespace-nowrap">
                         {b.full_name}
                       </td>
-                      <td className="p-4 font-mono text-muted whitespace-nowrap">
+                      <td className="p-4 font-mono text-slate-600 whitespace-nowrap">
                         {b.phone}
                       </td>
-                      <td className="p-4 text-muted">
+                      <td className="p-4 text-slate-600">
                         <div>{b.student_class || "-"}</div>
-                        <div className="text-[10px] text-muted/60">{b.institution || ""}</div>
+                        <div className="text-[10px] text-slate-400">{b.institution || ""}</div>
                       </td>
-                      <td className="p-4 font-mono text-muted whitespace-nowrap">
+                      <td className="p-4 font-mono text-slate-600 whitespace-nowrap">
                         {b.bkash_number}
                       </td>
-                      <td className="p-4 font-mono font-bold text-brand uppercase whitespace-nowrap">
+                      <td className="p-4 font-mono font-bold text-blue-700 uppercase whitespace-nowrap">
                         {b.transaction_id}
                       </td>
                       <td className="p-4 whitespace-nowrap">
                         {b.status === "verified" && (
-                          <span className="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 font-bold flex items-center gap-1 w-fit">
+                          <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold flex items-center gap-1 w-fit">
                             <CheckCircle size={12} weight="fill" /> ভেরিফাইড
                           </span>
                         )}
                         {b.status === "pending" && (
-                          <span className="px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-400 font-bold flex items-center gap-1 w-fit">
+                          <span className="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-bold flex items-center gap-1 w-fit">
                             <Clock size={12} weight="fill" /> পেন্ডিং
                           </span>
                         )}
                         {b.status === "rejected" && (
-                          <span className="px-2.5 py-1 rounded-full bg-red-500/15 text-red-400 font-bold flex items-center gap-1 w-fit">
+                          <span className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 font-bold flex items-center gap-1 w-fit">
                             <XCircle size={12} weight="fill" /> বাতিল
                           </span>
                         )}
@@ -385,7 +383,7 @@ export default function AdminDashboardPage() {
                             <button
                               disabled={actionLoading === b.id}
                               onClick={() => handleUpdateStatus(b.id, "verified")}
-                              className="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500 hover:text-ink font-bold transition-all disabled:opacity-50"
+                              className="px-3 py-1 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white border border-emerald-200 font-bold transition-all disabled:opacity-50"
                             >
                               Verify ✓
                             </button>
@@ -394,7 +392,7 @@ export default function AdminDashboardPage() {
                             <button
                               disabled={actionLoading === b.id}
                               onClick={() => handleUpdateStatus(b.id, "rejected")}
-                              className="px-3 py-1 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500 hover:text-ink font-semibold transition-all disabled:opacity-50"
+                              className="px-3 py-1 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-600 hover:text-white border border-rose-200 font-semibold transition-all disabled:opacity-50"
                             >
                               Reject ✕
                             </button>
