@@ -5,21 +5,22 @@ import { Nav } from "@/components/landing/nav";
 import { Footer } from "@/components/landing/footer";
 import { HalumAIModal } from "@/components/halum-ai-modal";
 import { CashoutModal } from "@/components/cashout-modal";
+import { FloatingAIButton } from "@/components/floating-ai-button";
 import { GameController, CheckCircle, ArrowClockwise, Sparkle, Trophy } from "@phosphor-icons/react";
 
-// 4x4 Mini Sudoku Puzzle (Great for Primary Olympiad logic building)
+// 4x4 Mini Sudoku Puzzle (Olympiad logic building with unique solution)
 const INITIAL_GRID = [
   [1, 0, 3, 0],
-  [0, 0, 0, 2],
-  [3, 0, 0, 0],
-  [0, 4, 0, 1],
+  [0, 4, 0, 2],
+  [2, 0, 4, 0],
+  [0, 3, 0, 1],
 ];
 
 const SOLUTION_GRID = [
   [1, 2, 3, 4],
-  [4, 3, 1, 2],
-  [3, 1, 2, 4],
-  [2, 4, 4, 1],
+  [3, 4, 1, 2],
+  [2, 1, 4, 3],
+  [4, 3, 2, 1],
 ];
 
 export default function SudokuPage() {
@@ -45,13 +46,18 @@ export default function SudokuPage() {
     newGrid[r][c] = num;
     setGrid(newGrid);
 
-    // Check if fully solved
+    // Check if fully solved correctly
     const allFilled = newGrid.every((row) => row.every((cell) => cell > 0));
     if (allFilled) {
-      setIsCompleted(true);
-      setPoints((prev) => prev + 20);
-      setRewardToast("+২০ পয়েন্ট যোগ হয়েছে! 🎮🎉");
-      setTimeout(() => setRewardToast(null), 3500);
+      const isCorrect = newGrid.every((row, r) =>
+        row.every((cell, c) => cell === SOLUTION_GRID[r][c])
+      );
+      if (isCorrect) {
+        setIsCompleted(true);
+        setPoints((prev) => prev + 20);
+        setRewardToast("+২০ পয়েন্ট যোগ হয়েছে! 🎮🎉");
+        setTimeout(() => setRewardToast(null), 3500);
+      }
     }
   };
 
@@ -139,6 +145,7 @@ export default function SudokuPage() {
       </main>
 
       <Footer />
+      <FloatingAIButton onClick={() => setIsHalumOpen(true)} />
       <HalumAIModal isOpen={isHalumOpen} onClose={() => setIsHalumOpen(false)} />
       <CashoutModal isOpen={isCashoutOpen} onClose={() => setIsCashoutOpen(false)} points={points} />
     </>

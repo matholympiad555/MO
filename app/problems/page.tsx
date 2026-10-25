@@ -6,6 +6,7 @@ import { Nav } from "@/components/landing/nav";
 import { Footer } from "@/components/landing/footer";
 import { HalumAIModal } from "@/components/halum-ai-modal";
 import { CashoutModal } from "@/components/cashout-modal";
+import { FloatingAIButton } from "@/components/floating-ai-button";
 import {
   Trophy,
   CheckCircle,
@@ -261,6 +262,7 @@ export default function ProblemsPage() {
 
       <Footer />
 
+      <FloatingAIButton onClick={() => setIsHalumOpen(true)} />
       <HalumAIModal isOpen={isHalumOpen} onClose={() => setIsHalumOpen(false)} />
       <CashoutModal isOpen={isCashoutOpen} onClose={() => setIsCashoutOpen(false)} points={points} />
     </>

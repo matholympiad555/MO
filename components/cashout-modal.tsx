@@ -55,7 +55,7 @@ export function CashoutModal({ isOpen, onClose, points = 120 }: CashoutModalProp
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2.5">
             <div className="flex justify-between items-center text-sm font-bold">
               <span className="text-amber-950">তোমার বর্তমান পয়েন্ট:</span>
-              <span className="text-lg font-black text-amber-600 font-mono">
+              <span className="text-lg font-black text-amber-800 font-mono">
                 {points} / {targetPoints} pts
               </span>
             </div>

@@ -60,6 +60,7 @@ create table if not exists public.profiles (
   updated_at     timestamptz not null default now()
 );
 
+drop trigger if exists profiles_updated_at on public.profiles;
 create trigger profiles_updated_at
   before update on public.profiles
   for each row execute function public.set_updated_at();
@@ -85,6 +86,7 @@ create table if not exists public.bookings (
   updated_at     timestamptz not null default now()
 );
 
+drop trigger if exists bookings_updated_at on public.bookings;
 create trigger bookings_updated_at
   before update on public.bookings
   for each row execute function public.set_updated_at();
@@ -137,6 +139,7 @@ create table if not exists public.cashout_requests (
   updated_at      timestamptz not null default now()
 );
 
+drop trigger if exists cashout_updated_at on public.cashout_requests;
 create trigger cashout_updated_at
   before update on public.cashout_requests
   for each row execute function public.set_updated_at();
@@ -197,6 +200,11 @@ alter table public.cashout_requests   enable row level security;
 alter table public.mock_submissions   enable row level security;
 alter table public.qa_questions       enable row level security;
 alter table public.qa_answers         enable row level security;
+
+-- (0) Admins Table Policies
+drop policy if exists "admins view admins" on public.admins;
+create policy "admins view admins"
+  on public.admins for select to authenticated using (public.is_admin());
 
 -- (A) Bookings Policies
 drop policy if exists "anyone can insert booking" on public.bookings;
@@ -272,6 +280,10 @@ drop policy if exists "anyone can ask question" on public.qa_questions;
 create policy "anyone can ask question"
   on public.qa_questions for insert to anon, authenticated with check (true);
 
+drop policy if exists "anyone can update question" on public.qa_questions;
+create policy "anyone can update question"
+  on public.qa_questions for update to anon, authenticated using (true);
+
 drop policy if exists "anyone can read answers" on public.qa_answers;
 create policy "anyone can read answers"
   on public.qa_answers for select to anon, authenticated using (true);
@@ -279,6 +291,10 @@ create policy "anyone can read answers"
 drop policy if exists "anyone can post answer" on public.qa_answers;
 create policy "anyone can post answer"
   on public.qa_answers for insert to anon, authenticated with check (true);
+
+drop policy if exists "anyone can update answer" on public.qa_answers;
+create policy "anyone can update answer"
+  on public.qa_answers for update to anon, authenticated using (true);
 
 -- ---------- 11. DEMO SEED DATA (For Immediate Verification) ----------
 insert into public.profiles (phone, full_name, student_class, institution, points, streak_days, solved_count)

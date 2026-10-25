@@ -5,6 +5,7 @@ import { Nav } from "@/components/landing/nav";
 import { Footer } from "@/components/landing/footer";
 import { HalumAIModal } from "@/components/halum-ai-modal";
 import { CashoutModal } from "@/components/cashout-modal";
+import { FloatingAIButton } from "@/components/floating-ai-button";
 import { BookOpen, DownloadSimple, ArrowSquareOut, FilePdf } from "@phosphor-icons/react";
 
 interface ResourceItem {
@@ -112,6 +113,7 @@ export default function ResourcesPage() {
       </main>
 
       <Footer />
+      <FloatingAIButton onClick={() => setIsHalumOpen(true)} />
       <HalumAIModal isOpen={isHalumOpen} onClose={() => setIsHalumOpen(false)} />
       <CashoutModal isOpen={isCashoutOpen} onClose={() => setIsCashoutOpen(false)} points={points} />
     </>

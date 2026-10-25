@@ -5,6 +5,7 @@ import { Nav } from "@/components/landing/nav";
 import { Footer } from "@/components/landing/footer";
 import { HalumAIModal } from "@/components/halum-ai-modal";
 import { CashoutModal } from "@/components/cashout-modal";
+import { FloatingAIButton } from "@/components/floating-ai-button";
 import { Trophy, Medal, Flame, Star, Sparkle } from "@phosphor-icons/react";
 
 interface LeaderboardUser {
@@ -118,8 +119,8 @@ export default function LeaderboardPage() {
                   <div className="text-xs font-semibold text-purple-700">{user.classLevel}</div>
                 </div>
                 <div className="pt-2 border-t border-slate-100 flex items-center justify-around text-xs font-bold">
-                  <span className="text-amber-600">{user.points} pts</span>
-                  <span className="text-orange-600 flex items-center gap-1">
+                  <span className="text-amber-800 font-black">{user.points} pts</span>
+                  <span className="text-orange-700 flex items-center gap-1">
                     <Flame size={14} weight="fill" />
                     {user.streak} দিন
                   </span>
@@ -155,10 +156,10 @@ export default function LeaderboardPage() {
 
                   <div className="flex items-center gap-4 text-right">
                     <div>
-                      <div className="font-black text-amber-600 text-sm sm:text-base font-mono">
+                      <div className="font-black text-amber-800 text-sm sm:text-base font-mono">
                         {user.points} pts
                       </div>
-                      <div className="text-[11px] text-slate-400">{user.solved} টি প্রশ্ন সলভ</div>
+                      <div className="text-[11px] text-slate-600 font-medium">{user.solved} টি প্রশ্ন সলভ</div>
                     </div>
                     <span className="hidden sm:inline-block text-xs font-bold bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full border border-purple-200">
                       {user.badge}
@@ -172,6 +173,7 @@ export default function LeaderboardPage() {
       </main>
 
       <Footer />
+      <FloatingAIButton onClick={() => setIsHalumOpen(true)} />
       <HalumAIModal isOpen={isHalumOpen} onClose={() => setIsHalumOpen(false)} />
       <CashoutModal isOpen={isCashoutOpen} onClose={() => setIsCashoutOpen(false)} points={points} />
     </>

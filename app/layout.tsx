@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Anek_Bangla, Hind_Siliguri, Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
+import { LanguageProvider } from "@/lib/language-context";
 import "./globals.css";
 
 const banglaDisplay = Anek_Bangla({
@@ -71,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full">
         <div className="grain" aria-hidden />
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

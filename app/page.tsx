@@ -11,6 +11,7 @@ import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
 import { HalumAIModal } from "@/components/halum-ai-modal";
 import { CashoutModal } from "@/components/cashout-modal";
+import { FloatingAIButton } from "@/components/floating-ai-button";
 import { Sparkle } from "@phosphor-icons/react";
 
 export default function Home() {
@@ -40,16 +41,7 @@ export default function Home() {
       <Footer />
 
       {/* Floating Bottom-Right Tiger AI Tutor Button (Exact from Image 4) */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => setIsHalumOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-700 hover:to-rose-600 text-white font-bold text-sm shadow-xl shadow-purple-500/30 hover:scale-105 active:scale-95 transition-all cursor-pointer border border-white/20"
-        >
-          <span className="text-lg">🐯</span>
-          <span>Tiger AI Tutor</span>
-          <span className="w-2 h-2 rounded-full bg-amber-300 animate-ping"></span>
-        </button>
-      </div>
+      <FloatingAIButton onClick={() => setIsHalumOpen(true)} />
 
       {/* Halum AI Modal */}
       <HalumAIModal isOpen={isHalumOpen} onClose={() => setIsHalumOpen(false)} />

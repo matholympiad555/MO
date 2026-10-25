@@ -9,8 +9,8 @@ import {
   Play,
   Pause,
   Star,
-  Sparkle,
 } from "@phosphor-icons/react";
+import { useLanguage } from "@/lib/language-context";
 
 interface HeroProps {
   onOpenHalumAI?: () => void;
@@ -18,6 +18,7 @@ interface HeroProps {
 
 export function Hero({ onOpenHalumAI }: HeroProps) {
   const [isPlaying, setIsPlaying] = useState(true);
+  const { t } = useLanguage();
 
   return (
     <section className="relative overflow-hidden bg-[#FAF9F6] border-b border-slate-200/80 pt-10 sm:pt-14 pb-16 sm:pb-24">
@@ -31,26 +32,25 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
             {/* Pill: Official Hub */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-900 text-xs sm:text-sm font-bold shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></span>
-              <span>Official Hub for Banglar Math Olympiad</span>
+              <span>{t.heroTag}</span>
             </div>
 
             {/* Main Headline (Exact Image 4) */}
             <div className="space-y-1">
               <h1 className="text-4xl sm:text-6xl lg:text-[4.2rem] font-black tracking-tight leading-[1.12]">
                 <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-800 bg-clip-text text-transparent">
-                  Tiger Math
+                  {t.heroTitle1}
                 </span>
                 <br />
                 <span className="text-slate-950 font-black">
-                  AI Olympiad Practice & Live Tutoring
+                  {t.heroTitle2}
                 </span>
               </h1>
             </div>
 
             {/* Subtitle */}
             <p className="text-slate-700 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl font-normal">
-              বাংলার গণিত অলিম্পিয়াডের সম্পূর্ণ প্ল্যাটফর্ম। এক হাজারেরও বেশি ক্যাটাগরিভিত্তিক গণিত সমস্যা, ১০০টি পদার্থবিজ্ঞান প্রশ্ন, প্রতি সমাধানে{" "}
-              <strong className="text-purple-700 font-bold">+১০ পয়েন্ট</strong>, অফিসিয়াল বিডিএমও রিসোর্স, মক টেস্ট এবং জেমিনাই এআই লাইভ টিউটর।
+              {t.heroSubtitle}
             </p>
 
             {/* Action Buttons */}
@@ -59,7 +59,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 href="/problems"
                 className="px-7 py-3.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white font-bold text-base shadow-lg shadow-purple-500/25 active:scale-95 transition-all flex items-center gap-2.5"
               >
-                <span>সমস্যা সমাধান শুরু করো</span>
+                <span>{t.heroSolveBtn}</span>
                 <ArrowRight size={18} weight="bold" />
               </Link>
 
@@ -70,7 +70,7 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 className="px-6 py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-900 font-bold text-sm sm:text-base border border-slate-300 shadow-xs flex items-center gap-2.5 transition-all"
               >
                 <YoutubeLogo size={22} weight="fill" className="text-red-600" />
-                <span>ইউটিউব চ্যানেল (@BanglarMathOlympiad) ↗</span>
+                <span>{t.heroYoutubeBtn}</span>
               </a>
             </div>
 
@@ -78,19 +78,19 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5 pt-4 text-xs sm:text-sm font-bold text-slate-700">
               <div className="flex items-center gap-1.5">
                 <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>১,০০০+ গণিত প্রশ্ন</span>
+                <span>{t.heroCheckMath}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>১০০টি পদার্থবিজ্ঞান সমস্যা</span>
+                <span>{t.heroCheckPhysics}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0" />
-                <span className="text-purple-700">প্রতি সমাধানে +১০ পয়েন্ট</span>
+                <span className="text-purple-700">{t.heroCheckPoints}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>বিনামূল্যে সম্পূর্ণ উন্মুক্ত</span>
+                <span>{t.heroCheckFree}</span>
               </div>
             </div>
           </div>
@@ -125,9 +125,9 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                 <div className="space-y-0.5">
                   <div className="text-sm font-bold text-slate-100 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-                    <span>BDMO National Camp Practice</span>
+                    <span>{t.heroDiscussionTitle}</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 font-medium">Live Problem Discussion</div>
+                  <div className="text-[11px] text-slate-400 font-medium">{t.heroDiscussionLive}</div>
                 </div>
                 <div className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-slate-800/80 text-amber-400 border border-slate-700">
                   00:05:39
@@ -155,22 +155,18 @@ export function Hero({ onOpenHalumAI }: HeroProps) {
                     <div className="w-6 h-6 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center">
                       T
                     </div>
-                    <span className="font-bold text-slate-200">Tahmid (IMO Solver)</span>
+                    <span className="font-bold text-slate-200">{t.heroQuoteSolver}</span>
                   </div>
                   <span className="text-[10px] text-slate-400 font-mono">05:45</span>
                 </div>
 
                 <p className="text-slate-300 leading-relaxed font-sans">
-                  &ldquo;The only step left is to apply Ptolemy&apos;s Theorem:{" "}
-                  <code className="text-amber-300 font-mono font-semibold">
-                    AC · BD = AB · CD + BC · DA
-                  </code>
-                  , which immediately yields the diameter!&rdquo;
+                  &ldquo;{t.heroQuotePtolemy}&rdquo;
                 </p>
 
                 <div className="pt-2 border-t border-slate-700/60 text-[11px] text-purple-300 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-                  <span>Sofia: &ldquo;Go with the circumradius formula R = (abc) / (4Δ)&rdquo;</span>
+                  <span>{t.heroQuoteSofia}</span>
                 </div>
               </div>
 

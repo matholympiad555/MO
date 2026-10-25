@@ -5,6 +5,7 @@ import { Nav } from "@/components/landing/nav";
 import { Footer } from "@/components/landing/footer";
 import { HalumAIModal } from "@/components/halum-ai-modal";
 import { CashoutModal } from "@/components/cashout-modal";
+import { FloatingAIButton } from "@/components/floating-ai-button";
 import { Trophy, CheckCircle, XCircle, Lightbulb, Sparkle } from "@phosphor-icons/react";
 
 interface PhysicsProblem {
@@ -182,6 +183,7 @@ export default function PhysicsPage() {
       </main>
 
       <Footer />
+      <FloatingAIButton onClick={() => setIsHalumOpen(true)} />
       <HalumAIModal isOpen={isHalumOpen} onClose={() => setIsHalumOpen(false)} />
       <CashoutModal isOpen={isCashoutOpen} onClose={() => setIsCashoutOpen(false)} points={points} />
     </>
