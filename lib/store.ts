@@ -363,7 +363,7 @@ export const store = {
   addQaQuestion(data: {
     title: string;
     body: string;
-    topic: "সংখ্যাতত্ত্ব" | "জ্যামিতি" | "প্যাটার্ন ও যুক্তি" | "গণনাতত্ত্ব" | "সাধারণ";
+    topic: string;
     author_name: string;
     author_class?: string;
     author_phone?: string;

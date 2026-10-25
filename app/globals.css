@@ -1,18 +1,43 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Shadhinata220";
+  src: url("/fonts/Shadhinata220.woff2") format("woff2"),
+       url("/fonts/Shadhinata220.woff") format("woff");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SweetArkopravo";
+  src: url("/fonts/SweetArkopravo.woff") format("woff"),
+       url("/fonts/SweetArkopravo.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
-  --color-ink: #f8fafc;
+  --color-ink: #F6F6F4;
   --color-ink-2: #ffffff;
-  --color-ink-3: #f1f5f9;
-  --color-paper: #0f172a;
-  --color-muted: #475569;
-  --color-brand: #d97706;
-  --color-brand-deep: #b45309;
-  --color-navy: #0f4bb4;
-  --color-navy-dark: #0a337f;
+  --color-ink-3: #edf0f2;
+  --color-paper: #2d2d2d;
+  --color-muted: #596775;
+  --color-brand: #0072c6;
+  --color-brand-deep: #005a9e;
+  --color-gz-blue: #0072c6;
+  --color-gz-blue-dark: #005a9e;
+  --color-gz-bg: #F6F6F4;
+  --color-gz-green: #28a745;
+  --color-gz-green-dark: #218838;
+  --color-navy: #0072c6;
+  --color-navy-dark: #005a9e;
   --color-hot: #e11d48;
   --color-sky: #0284c7;
-  --font-display: var(--font-bangla-display);
+  --font-display: var(--font-shadhinata), "Shadhinata220", var(--font-bangla-display), sans-serif;
+  --font-shadhinata: var(--font-shadhinata), "Shadhinata220", sans-serif;
+  --font-arkopravo: var(--font-shadhinata), "Shadhinata220", sans-serif;
   --font-body: var(--font-bangla-body);
   --font-num: var(--font-num);
 }
@@ -66,6 +91,10 @@ body {
 @utility font-num {
   font-family: var(--font-num), var(--font-bangla-display), sans-serif;
   font-variant-numeric: tabular-nums;
+}
+
+@utility font-arkopravo {
+  font-family: var(--font-arkopravo), "SweetArkopravo", var(--font-bangla-display), system-ui, sans-serif;
 }
 
 @utility card-shell {

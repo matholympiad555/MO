@@ -13,7 +13,8 @@ export async function GET() {
       total_marks: t.total_marks,
       syllabus_topics: t.syllabus_topics,
       difficulty: t.difficulty,
-      question_count: t.questions.length,
+      status: t.status || "live",
+      question_count: t.questions ? t.questions.length : 10,
     }));
     return NextResponse.json({ success: true, data: safeTests });
   } catch (error: any) {

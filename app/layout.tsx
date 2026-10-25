@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Anek_Bangla, Hind_Siliguri, Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const banglaDisplay = Anek_Bangla({
@@ -18,6 +19,29 @@ const num = Space_Grotesk({
   variable: "--font-num",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const shadhinataFont = localFont({
+  src: [
+    {
+      path: "../public/fonts/Shadhinata220.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Shadhinata220.woff",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-shadhinata",
+  display: "swap",
+});
+
+const sweetArkopravo = localFont({
+  src: "../public/fonts/SweetArkopravo.woff",
+  variable: "--font-arkopravo",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -43,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="bn"
-      className={`${banglaDisplay.variable} ${banglaBody.variable} ${num.variable} h-full antialiased`}
+      className={`${shadhinataFont.variable} ${sweetArkopravo.variable} ${banglaDisplay.variable} ${banglaBody.variable} ${num.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         <div className="grain" aria-hidden />

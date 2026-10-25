@@ -17,6 +17,17 @@ begin
 end;
 $$;
 
+-- ---------- admins ----------
+-- (Must be created before is_admin() function so table relation exists)
+create table if not exists public.admins (
+  email      text primary key,
+  created_at timestamptz not null default now()
+);
+
+-- ⬇⬇ REPLACE with your real admin email before running ⬇⬇
+insert into public.admins (email) values ('admin@banglarmatholympiad.com')
+on conflict (email) do nothing;
+
 -- admin check: any authenticated user whose email is listed in admins
 create or replace function public.is_admin()
 returns boolean
@@ -30,17 +41,6 @@ as $$
     where lower(admins.email) = lower(coalesce(auth.jwt() ->> 'email', ''))
   );
 $$;
-
--- ---------- admins ----------
--- paste the email you will use to log into /admin
-create table if not exists public.admins (
-  email      text primary key,
-  created_at timestamptz not null default now()
-);
-
--- ⬇⬇ REPLACE with your real admin email before running ⬇⬇
-insert into public.admins (email) values ('admin@banglarmatholympiad.com')
-on conflict (email) do nothing;
 
 -- ---------- bookings (pre-book form submissions) ----------
 create table if not exists public.bookings (

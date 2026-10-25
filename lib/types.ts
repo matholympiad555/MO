@@ -72,6 +72,7 @@ export type InteractiveMockTest = {
   total_marks: number;
   syllabus_topics: string[];
   difficulty: "সহজ" | "মাঝারি" | "অলিম্পিয়াড স্ট্যান্ডার্ড";
+  status?: "live" | "upcoming" | "completed";
   questions: TestQuestion[];
 };
 
@@ -101,7 +102,7 @@ export type QaQuestion = {
   id: string;
   title: string;
   body: string;
-  topic: "সংখ্যাতত্ত্ব" | "জ্যামিতি" | "প্যাটার্ন ও যুক্তি" | "গণনাতত্ত্ব" | "সাধারণ";
+  topic: string;
   author_name: string;
   author_class?: string;
   author_phone?: string;
